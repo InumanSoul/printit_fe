@@ -8,6 +8,8 @@ const Products = () => {
     <Container>
       <PageTitle>Productos</PageTitle>
 
+      <a href='/products/new' className="bg-pink-500 text-white rounded-lg p-2 w-full">Agregar producto</a>
+
       <div className="mt-4">
         <p className="text-gray-500">
           Listado de productos
