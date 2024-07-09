@@ -5,18 +5,20 @@ import MainNavigation from '@/components/MainNavigation/MainNavigation'
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { useFloating } from '@floating-ui/react'
+import { useAuth } from '@/hooks/useAuth'
 
 const SideNav = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const { user, logout } = useAuth()
   const { refs, floatingStyles } = useFloating({
     open: isOpen,
     placement: 'right-start',
   })
 
   return (
-    <aside className="h-dvh w-64 border-r">
+    <aside className="h-dvh w-64 border-r sticky top-0">
       <Image 
-        className="flex mt-5 ml-4 mb-6 dark:invert"
+        className="flex mt-5 ml-4 mb-6"
         src="/printit.svg"
         width={30} 
         height={50} 
@@ -27,9 +29,9 @@ const SideNav = () => {
         <button type='button' ref={refs.setReference} onClick={() => setIsOpen(!isOpen)} className="border rounded-lg p-2 w-full flex justify-between items-center gap-2">
           <div className="flex gap-2">
             <div className="size-10 bg-gray-200 rounded-full"></div>
-            <div>
-              <p className="font-semibold">Usuario</p>
-              <p className="text-xs text-gray-400">Empresa</p>
+            <div className='text-left'>
+              <p className="font-semibold">{ user?.name }</p>
+              <p className="text-xs text-gray-400">{ user?.company || 'Empresa' }</p>
             </div>
           </div>
           <ChevronRightIcon className="size-5 text-gray-800"/>
@@ -42,9 +44,9 @@ const SideNav = () => {
               <a href="/account" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
                 Mi cuenta
               </a>
-              <a href="/login" className="px-4 py-2 flex w-full items-center text-pink-500 hover:bg-black/5">
+              <button type="button" onClick={logout} className="px-4 py-2 flex w-full items-center text-pink-500 hover:bg-black/5">
                 Cerrar sesión
-              </a>
+              </button>
             </li>
           </ul>
         </div>

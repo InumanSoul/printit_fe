@@ -6,14 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:docker:dev": "docker compose -f docker-compose.dev.yml build",
+    "run:docker:dev": "docker compose -f docker-compose.dev.yml up -d"
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.19",
     "@heroicons/react": "^2.1.4",
+    "axios": "^1.7.2",
     "next": "14.2.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "swr": "^2.2.5",
+    "tailwind-datepicker-react": "^1.4.3"
   },
   "devDependencies": {
     "@types/node": "^20",
