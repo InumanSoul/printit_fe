@@ -6,6 +6,7 @@ import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { useFloating } from '@floating-ui/react'
 import { useAuth } from '@/hooks/useAuth'
+import Link from 'next/link'
 
 const SideNav = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -40,15 +41,15 @@ const SideNav = () => {
         </button>
       </div>
       { 
-        <div ref={refs.setFloating} className={`${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} duration-150 absolute top-0 left-0 bg-white border rounded-lg`} style={floatingStyles}>
+        <div ref={refs.setFloating} className={`${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} duration-150 absolute top-0 left-0 bg-white border rounded-lg z-50`} style={floatingStyles}>
           <ul>
             <li>
-              <a href="/account" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
+              <Link href="/account" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
                 Mi cuenta
-              </a>
-              <a href="/company" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
+              </Link>
+              <Link href="/company" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
                 Empresa
-              </a>
+              </Link>
               <button type="button" onClick={logout} className="px-4 py-2 flex w-full items-center text-pink-500 hover:bg-black/5">
                 Cerrar sesión
               </button>

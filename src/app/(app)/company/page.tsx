@@ -1,6 +1,9 @@
 import Container from '@/components/Container/Container'
 import PageTitle from '@/components/PageTitle/PageTitle'
-import React from 'react'
+
+export const metadata = {
+  title: 'Printit: Empresa',
+}
 
 const Company = () => {
   return (

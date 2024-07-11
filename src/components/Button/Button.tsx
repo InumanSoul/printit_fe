@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,12 +27,12 @@ const Button = ({ children, variant, disabled, href, target, size, ...props }: B
 
   if (href) {
     return (
-      <a
+      <Link
         href={href}
         className={classes}
       >
         { children }
-      </a>
+      </Link>
     )
   }
 

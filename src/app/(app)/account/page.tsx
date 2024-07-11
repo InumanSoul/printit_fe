@@ -1,5 +1,8 @@
 import Container from '@/components/Container/Container'
-import React from 'react'
+
+export const metadata = {
+  title: 'Printit: Mi cuenta',
+}
 
 const Account = () => {
   return (

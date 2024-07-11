@@ -1,8 +1,11 @@
 import Button from '@/components/Button/Button';
 import Container from '@/components/Container/Container';
 import PageTitle from '@/components/PageTitle/PageTitle';
-import React from 'react';
 import { mockSales } from './sales.mock';
+
+export const metadata = {
+	title: 'Printit: Ventas',
+}
 
 const Sales = () => {
 	return (

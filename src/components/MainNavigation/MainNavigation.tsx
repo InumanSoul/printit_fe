@@ -3,7 +3,7 @@
 import React from 'react'
 import MenuItem from '../MenuItem/MenuItem'
 import { usePathname } from 'next/navigation'
-import { ArrowDownCircleIcon, ArrowUpCircleIcon, BuildingStorefrontIcon, ChartBarIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/16/solid'
+import { ArrowDownCircleIcon, ArrowUpCircleIcon, ChartBarIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/16/solid'
 
 const MainNavigation = () => {
   const pathname = usePathname()
