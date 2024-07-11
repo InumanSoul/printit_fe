@@ -18,7 +18,7 @@ const SideNav = () => {
 
   return (
     <aside className="h-dvh w-72 border-r sticky top-0">
-      <a href='/'>
+      <a href={user ? '/sales' : '/'}>
         <Image 
           className="flex mt-5 ml-4 mb-6"
           src="/printit.svg"
@@ -41,7 +41,7 @@ const SideNav = () => {
         </button>
       </div>
       { 
-        <div ref={refs.setFloating} className={`${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} duration-150 absolute top-0 left-0 bg-white border rounded-lg z-50`} style={floatingStyles}>
+        <div ref={refs.setFloating} className={`${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} duration-150 shadow-lg min-w-40 bg-white border rounded-lg z-50`} style={floatingStyles}>
           <ul>
             <li>
               <Link href="/account" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
@@ -49,6 +49,9 @@ const SideNav = () => {
               </Link>
               <Link href="/company" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
                 Empresa
+              </Link>
+              <Link href="/preferences" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
+                Preferencias
               </Link>
               <button type="button" onClick={logout} className="px-4 py-2 flex w-full items-center text-pink-500 hover:bg-black/5">
                 Cerrar sesión
