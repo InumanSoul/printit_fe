@@ -5,7 +5,7 @@ const InputError = ({
 	className,
 }: {
 	messages: Array<string>;
-	className: string;
+	className?: string;
 }) => (
 	<>
 		{messages?.length > 0 && (

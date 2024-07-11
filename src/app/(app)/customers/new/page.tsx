@@ -1,7 +1,46 @@
+'use client'
+
 import Container from '@/components/Container/Container'
-import React from 'react'
+import Input from '@/components/Input/Input'
+import InputLabel from '@/components/InputLabel/InputLabel'
+import React, { useState } from 'react'
+import { useCreateCustomer } from '../_domain/customers'
+import InputError from '@/components/InputError/InputError'
+import Button from '@/components/Button/Button'
 
 const NewCustomer = () => {
+  const { createCustomer } = useCreateCustomer()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errors, setErrors] = useState({
+    phone: [],
+    email: [],
+    address: [],
+    document: []
+  })
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      address: formData.get('address') as string,
+      document: formData.get('document') as string,
+    }
+
+    createCustomer({
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      document: data.document,
+      setErrors
+    })
+    setIsSubmitting(false)
+  }
+
   return (
     <Container>
       <div className='w-full md:w-4/12 mx-auto'>
@@ -9,25 +48,35 @@ const NewCustomer = () => {
         <a href='/customers' className='rounded-lg p-2 border flex w-fit mb-5'>Volver</a>
         <h2 className='text-2xl font-semibold'>Crear cliente</h2>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className='mb-2 flex flex-col'>
-            <label className='text-sm font-semibold text-gray-700'>Nombre</label>
-            <input type='text' className='border border-gray-400 rounded-lg w-full p-2 focus:border-pink-400 outline-pink-400/50 outline-4 outline-offset-2' required/>
+            <InputLabel htmlFor='name'>Nombre</InputLabel>
+            <Input name='name' type='text' required/>
           </div>
           <div className='mb-2 flex flex-col'>
-            <label className='text-sm font-semibold text-gray-700'>Email</label>
-            <input type='email' className='border border-gray-400 rounded-lg w-full p-2 focus:border-pink-400 outline-pink-400/50 outline-4 outline-offset-2' required/>
+            <InputLabel htmlFor='email'>Email</InputLabel>
+            <Input name='email' type='email' required/>
+            <InputError messages={errors.email} className='mt-2'/>
           </div>
           <div className='mb-2 flex flex-col'>
-            <label className='text-sm font-semibold text-gray-700'>Teléfono</label>
-            <input type='tel' className='border border-gray-400 rounded-lg w-full p-2 focus:border-pink-400 outline-pink-400/50 outline-4 outline-offset-2' required/>
+            <InputLabel htmlFor='phone'>Teléfono</InputLabel>
+            <Input name='phone' type='tel' required/>
+            <InputError messages={errors.phone} className='mt-2'/>
           </div>
           <div className='mb-2 flex flex-col'>
-            <label className='text-sm font-semibold text-gray-700'>Dirección</label>
-            <input type='text' className='border border-gray-400 rounded-lg w-full p-2 focus:border-pink-400 outline-pink-400/50 outline-4 outline-offset-2' required/>
+            <InputLabel htmlFor='address'>Dirección</InputLabel>
+            <Input name='address' type='text' required/>
+            <InputError messages={errors.address} className='mt-2'/>
+          </div>
+          <div className='mb-2 flex flex-col'>
+            <InputLabel htmlFor='document'>Documento</InputLabel>
+            <Input name='document' type='text' required/>
+            <InputError messages={errors.document} className='mt-2'/>
           </div>
           <div className='mb-2'>
-            <button className='bg-pink-500 text-white rounded-lg p-2 flex w-fit'>Crear cliente</button>
+            <Button variant='primary' disabled={isSubmitting} type='submit'>
+              Guardar
+            </Button>
           </div>
         </form>
       </div>

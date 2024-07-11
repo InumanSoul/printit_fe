@@ -1,9 +1,22 @@
 import useSWR from 'swr'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import axios from '@/configs/axios'
 
-export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
+interface UseAuthParams {
+    middleware?: string,
+    redirectIfAuthenticated?: any
+}
+
+export interface LoginProps {
+    email: string,
+    password: string,
+    remember?: boolean,
+    setErrors?: React.SetStateAction<any>,
+    setStatus?: React.SetStateAction<any>
+}
+
+export const useAuth = ({ middleware, redirectIfAuthenticated } : UseAuthParams = {}) => {
     const router = useRouter()
     const params = useParams()
 
@@ -15,12 +28,15 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                 if (error.response.status !== 409) throw error
 
                 router.push('/verify-email')
-            }),
+            }), {
+                revalidateOnFocus: false,
+                revalidateOnReconnect: true,
+            }
     )
 
     const csrf = () => axios.get('/sanctum/csrf-cookie')
 
-    const register = async ({ setErrors, ...props }) => {
+    const register = async ({ setErrors, ...props }: {setErrors: React.SetStateAction<any>, props: any}) => {
         await csrf()
 
         setErrors([])
@@ -35,14 +51,18 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             })
     }
 
-    const login = async ({ setErrors, setStatus, ...props }) => {
+    const login = async ({ setErrors, setStatus, email, password, remember }: LoginProps) => {
         await csrf()
 
         setErrors([])
         setStatus(null)
 
         axios
-            .post('/login', props)
+            .post('/login', {
+                email,
+                password,
+                remember
+            })
             .then(() => mutate())
             .catch(error => {
                 if (error.response.status !== 422) throw error
@@ -51,7 +71,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             })
     }
 
-    const forgotPassword = async ({ setErrors, setStatus, email }) => {
+    const forgotPassword = async ({ setErrors, setStatus, email }: {setErrors: React.SetStateAction<any>, setStatus: React.SetStateAction<any>, email: string}) => {
         await csrf()
 
         setErrors([])
@@ -67,7 +87,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             })
     }
 
-    const resetPassword = async ({ setErrors, setStatus, ...props }) => {
+    const resetPassword = async ({ setErrors, setStatus, ...props } : {setErrors: React.SetStateAction<any>, setStatus: React.SetStateAction<any>, props: any}) => {
         await csrf()
 
         setErrors([])
@@ -85,7 +105,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             })
     }
 
-    const resendEmailVerification = ({ setStatus }) => {
+    const resendEmailVerification = ({ setStatus }: {setStatus: React.SetStateAction<any>}) => {
         axios
             .post('/email/verification-notification')
             .then(response => setStatus(response.data.status))
@@ -99,15 +119,19 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         window.location.pathname = '/login'
     }
 
-    useEffect(() => {
-        if (middleware === 'guest' && redirectIfAuthenticated && user)
+    useLayoutEffect(() => {
+        if (middleware === 'guest' && redirectIfAuthenticated && user) {
             router.push(redirectIfAuthenticated)
+        }
         if (
             window.location.pathname === '/verify-email' &&
             user?.email_verified_at
-        )
+        ) {
             router.push(redirectIfAuthenticated)
-        if (middleware === 'auth' && error) logout()
+        }
+        if (middleware === 'auth' && error) {
+            logout()
+        }
     }, [user, error])
 
     return {

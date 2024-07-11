@@ -9,7 +9,7 @@ import { useAuth } from '@/hooks/useAuth'
 
 const SideNav = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const { user, logout } = useAuth()
+  const { user, logout } = useAuth({ middleware: 'guest' })
   const { refs, floatingStyles } = useFloating({
     open: isOpen,
     placement: 'right-start',
@@ -17,20 +17,22 @@ const SideNav = () => {
 
   return (
     <aside className="h-dvh w-64 border-r sticky top-0">
-      <Image 
-        className="flex mt-5 ml-4 mb-6"
-        src="/printit.svg"
-        width={30} 
-        height={50} 
-        alt="Printit Logo"
-        priority  
-      />
+      <a href='/'>
+        <Image 
+          className="flex mt-5 ml-4 mb-6"
+          src="/printit.svg"
+          width={30} 
+          height={50} 
+          alt="Printit Logo"
+          priority  
+        />
+      </a>
       <div className="flex flex-col px-4 mb-5">
         <button type='button' ref={refs.setReference} onClick={() => setIsOpen(!isOpen)} className="border rounded-lg p-2 w-full flex justify-between items-center gap-2">
           <div className="flex gap-2">
             <div className="size-10 bg-gray-200 rounded-full"></div>
             <div className='text-left'>
-              <p className="font-semibold">{ user?.name }</p>
+              <p className="font-semibold">{ user?.name || 'Nombre' }</p>
               <p className="text-xs text-gray-400">{ user?.company || 'Empresa' }</p>
             </div>
           </div>

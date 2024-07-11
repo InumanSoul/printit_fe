@@ -20,7 +20,7 @@ const Login = () => {
       clearBtn: "",
       icons: "",
       text: "",
-      disabledText: "bg-gray-200 text-gray-400",
+      disabledText: "bg-gray-200 dark:bg-gray-600 text-gray-400 dark:text-gray-500",
       input: "",
       inputIcon: "",
       selected: "bg-green-500 hover:bg-green-400",

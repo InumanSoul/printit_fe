@@ -1,9 +1,9 @@
-
 import Container from '@/components/Container/Container'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import React from 'react'
 import CustomersList from './CustomersList'
 import { Metadata } from 'next';
+import Button from '@/components/Button/Button';
 
 export const metadata: Metadata = {
   title: "Clientes",
@@ -11,13 +11,15 @@ export const metadata: Metadata = {
 };
 
 const Customers = () => {
+
   return (
     <Container>
       <PageTitle>Clientes</PageTitle>
 
-      <a href='/customers/new' className="bg-pink-500 text-white rounded-lg p-2 flex w-fit mb-4">Crear cliente</a>
-
-      <CustomersList />
+      <Button href='/customers/new' variant='primary'>Crear cliente</Button>
+      <div className='w-full md:w-4/12 mx-auto'>
+        <CustomersList />
+      </div>
     </Container>
   )
 }
