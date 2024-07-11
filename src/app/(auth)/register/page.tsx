@@ -1,5 +1,6 @@
 'use client'
 
+import Button from '@/components/Button/Button'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 import Datepicker from "tailwind-datepicker-react"
@@ -73,7 +74,7 @@ const Login = () => {
               <input type='text' className='border border-gray-400 rounded-lg w-full p-2 focus:border-pink-400 outline-pink-400/50 outline-4 outline-offset-2' required/>
             </div>
             <div className='mb-2'>
-              <button className='bg-pink-500 text-white rounded-lg p-2 w-full'>Crear cuenta</button>
+              <Button variant='primary'>Crear cuenta</Button>
             </div>
           </form>
         </div>

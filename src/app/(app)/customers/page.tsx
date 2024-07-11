@@ -16,7 +16,7 @@ const Customers = () => {
     <Container>
       <PageTitle>Clientes</PageTitle>
 
-      <Button href='/customers/new' variant='primary'>Crear cliente</Button>
+      <Button href='/customers/new' variant='primary' className='w-fit'>Crear cliente</Button>
       <div className='w-full md:w-4/12 mx-auto'>
         <CustomersList />
       </div>

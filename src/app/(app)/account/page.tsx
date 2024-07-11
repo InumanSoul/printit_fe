@@ -26,8 +26,8 @@ const Account = () => {
           </div>
         </div>
         <div className='bg-pink-50 border border-pink-300 rounded-xl p-5'>
-          <h4 className='text-xl font-bold'>Nombre Plan</h4>
-          <p className='text-gray-500'>Vence el 25/10/28</p>
+          <h4 className='text-xl font-bold text-pink-600'>Nombre Plan</h4>
+          <p className='text-pink-500'>Vence el 25/10/28</p>
         </div>
       </div>
     </Container>

@@ -3,7 +3,7 @@
 import React from 'react'
 import MenuItem from '../MenuItem/MenuItem'
 import { usePathname } from 'next/navigation'
-import { ArrowDownCircleIcon, ArrowUpCircleIcon, BuildingStorefrontIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/16/solid'
+import { ArrowDownCircleIcon, ArrowUpCircleIcon, BuildingStorefrontIcon, ChartBarIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/16/solid'
 
 const MainNavigation = () => {
   const pathname = usePathname()
@@ -11,7 +11,7 @@ const MainNavigation = () => {
   const menuItems = [
     { href: '/sales', icon: ArrowUpCircleIcon, text: 'Ingresos' },
     { href: '/expenses', icon: ArrowDownCircleIcon, text: 'Gastos' },
-    { href: '/company', icon: BuildingStorefrontIcon, text: 'Empresa' },
+    { href: '/reports', icon: ChartBarIcon, text: 'Reportes' },
     { href: '/customers', icon: UserGroupIcon, text: 'Clientes' },
     { href: '/products', icon: CubeIcon, text: 'Productos' },
   ]

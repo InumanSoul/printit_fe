@@ -16,7 +16,7 @@ const SideNav = () => {
   })
 
   return (
-    <aside className="h-dvh w-64 border-r sticky top-0">
+    <aside className="h-dvh w-72 border-r sticky top-0">
       <a href='/'>
         <Image 
           className="flex mt-5 ml-4 mb-6"
@@ -45,6 +45,9 @@ const SideNav = () => {
             <li>
               <a href="/account" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
                 Mi cuenta
+              </a>
+              <a href="/company" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
+                Empresa
               </a>
               <button type="button" onClick={logout} className="px-4 py-2 flex w-full items-center text-pink-500 hover:bg-black/5">
                 Cerrar sesión
