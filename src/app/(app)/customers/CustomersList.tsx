@@ -3,7 +3,7 @@ import React from 'react'
 import { useGetCustomers } from './_domain/customers'
 import EmptyState from '@/components/EmptyState/EmptyState'
 import { Customers } from './_domain/types'
-import { EyeIcon, PencilIcon } from '@heroicons/react/24/outline'
+import { EyeIcon } from '@heroicons/react/24/outline'
 
 const CustomersList = () => {
   const { customers, isLoading, error }: any = useGetCustomers()
@@ -29,9 +29,6 @@ const CustomersList = () => {
                 <div className='flex gap-2 items-center'>
                   <a href={`/customers/${customer.id}`} className='hover:bg-gray-100 p-5 rounded-full'>
                     <EyeIcon className='size-5 text-gray-500'/>
-                  </a>
-                  <a href={`/customers/${customer.id}`} className='hover:bg-gray-100 p-5 rounded-full'>
-                    <PencilIcon className='size-5 text-gray-500'/>
                   </a>
                 </div>
               </li>

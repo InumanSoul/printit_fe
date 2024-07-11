@@ -1,11 +1,15 @@
-import { Metadata } from "next";
-import SideNav from "./SideNav";
+'use client'
 
-export const metadata: Metadata = {
-  title: "Printit: Su empresa inteligente",
-};
+import { useAuth } from "@/hooks/useAuth";
+import SideNav from "./SideNav";
+import Loading from "./Loading";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
+  const { user } = useAuth({ middleware: 'auth' });
+
+  if (!user) {
+    return <Loading />;
+  }
 
   return (
     <main className="flex">

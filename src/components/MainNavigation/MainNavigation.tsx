@@ -7,41 +7,28 @@ import { ArrowDownCircleIcon, ArrowUpCircleIcon, BuildingStorefrontIcon, CubeIco
 
 const MainNavigation = () => {
   const pathname = usePathname()
+
+  const menuItems = [
+    { href: '/sales', icon: ArrowUpCircleIcon, text: 'Ingresos' },
+    { href: '/expenses', icon: ArrowDownCircleIcon, text: 'Gastos' },
+    { href: '/company', icon: BuildingStorefrontIcon, text: 'Empresa' },
+    { href: '/customers', icon: UserGroupIcon, text: 'Clientes' },
+    { href: '/products', icon: CubeIcon, text: 'Productos' },
+  ]
   
   return (
     <nav className="font-semibold text-gray-800 mt-2">
       <ul>
-        <li>
-          <MenuItem href="/sales" active={pathname === '/sales'}>
-            <ArrowUpCircleIcon className='size-4'/>
-            Ingresos
-          </MenuItem>
-        </li>
-        <li>
-          <MenuItem href="/expenses" active={pathname === '/expenses'}>
-            <ArrowDownCircleIcon className='size-4'/>
-            Gastos
-          </MenuItem>
-        </li>
-        <li>
-          <MenuItem href="/company" active={pathname === '/company'}>
-            <BuildingStorefrontIcon className='size-4'/>
-            Empresa
-          </MenuItem>
-        </li>
-        <li>
-          
-          <MenuItem href="/customers" active={pathname === '/customers'}>
-            <UserGroupIcon className='size-4'/>
-            Clientes
-          </MenuItem>
-        </li>
-        <li>
-          <MenuItem href="/products" active={pathname === '/products'}>
-            <CubeIcon className='size-4'/>
-            Productos
-          </MenuItem>
-        </li>
+        {
+          menuItems.map((item, index) => (
+            <li key={index}>
+              <MenuItem href={item.href} active={pathname.includes(item.href)}>
+                {<item.icon className='size-4'/>}
+                {item.text}
+              </MenuItem>
+            </li>
+          ))
+        }
       </ul>
     </nav>
   )

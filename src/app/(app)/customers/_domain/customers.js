@@ -2,6 +2,8 @@
 
 import useSWR from 'swr'
 import { fetcher } from '../../_infraestructure/fetcher'
+import axios from '@/configs/axios'
+import { useRouter } from 'next/navigation'
 
 export const useGetCustomers = () => {
   const { data, error, isLoading } = useSWR('/api/customers', () => fetcher('/api/customers'), { revalidateOnFocus: false })
@@ -20,5 +22,29 @@ export const useGetCustomer = (id) => {
     customer: data,
     error,
     isLoading,
+  }
+}
+
+export const useCreateCustomer = () => {
+  const csrf = () => axios.get('/sanctum/csrf-cookie')
+  const router = useRouter()
+
+  const createCustomer = async ({ setErrors, ...props }) => {
+    await csrf()
+
+    setErrors([])
+
+    axios
+      .post('/api/customers', props)
+      .then(() => {
+        router.push('/customers')
+      })
+      .catch(error => {
+          setErrors(error.response.data.errors)
+      })
+  }
+
+  return {
+    createCustomer,
   }
 }
