@@ -2,6 +2,7 @@
 
 import Button from '@/components/Button/Button'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 import React from 'react'
 import Datepicker from "tailwind-datepicker-react"
 
@@ -79,7 +80,7 @@ const Login = () => {
           </form>
         </div>
       </div>
-      <p>Ya tengo cuenta<a href='/login' className='text-pink-500 text-center ml-1'>Inicia sesión</a></p>
+      <p>Ya tengo cuenta<Link href='/login' className='text-pink-500 text-center ml-1'>Inicia sesión</Link></p>
     </div>
   )
 }

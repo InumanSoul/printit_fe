@@ -2,6 +2,7 @@ import Paginator from '@/components/Paginator/Paginator'
 import { EyeIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 import { Customers } from '../_domain/types'
+import Link from 'next/link'
 
 interface CustomersListProps {
   customers: Customers[]
@@ -28,9 +29,9 @@ const CustomersList = ({ customers }: CustomersListProps) => {
                 <p className='text-gray-500'>{customer.email}</p>
               </div>
               <div className='flex gap-2 items-center'>
-                <a href={`/customers/${customer.id}`} className='hover:bg-gray-100 p-5 rounded-full'>
+                <Link href={`/customers/${customer.id}`} className='hover:bg-gray-100 p-5 rounded-full'>
                   <EyeIcon className='size-5 text-gray-500'/>
-                </a>
+                </Link>
               </div>
             </li>
           ))

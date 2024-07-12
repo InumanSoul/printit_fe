@@ -4,6 +4,7 @@ import React from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import InputError from '@/components/InputError/InputError'
 import Button from '@/components/Button/Button'
+import Link from 'next/link'
 
 const LoginForm = () => {
   const { login } = useAuth({
@@ -52,7 +53,7 @@ const LoginForm = () => {
         </label>
       </div>
       <Button variant='primary' className='w-full'>Iniciar sesión</Button>
-      <a href='/forgot-password' className='text-pink-500 text-center mt-3 w-full block'>¿Olvidaste tu contraseña?</a>
+      <Link href='/forgot-password' className='text-pink-500 text-center mt-3 w-full block'>¿Olvidaste tu contraseña?</Link>
     </form>
   )
 }

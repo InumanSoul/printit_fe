@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const NotFound = () => {
@@ -14,7 +15,7 @@ const NotFound = () => {
           </p>
         </div>
           
-        <a href="/customers" className="bg-pink-500 text-white rounded-lg p-2 w-full">Volver al inicio</a>
+        <Link href="/customers" className="bg-pink-500 text-white rounded-lg p-2 w-full">Volver al inicio</Link>
       </div>
     </div>
   )

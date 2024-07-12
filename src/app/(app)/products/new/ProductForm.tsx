@@ -1,5 +1,7 @@
 'use client'
 
+import Input from '@/components/Input/Input'
+import InputLabel from '@/components/InputLabel/InputLabel'
 import React from 'react'
 
 const ProductForm = () => {
@@ -8,20 +10,24 @@ const ProductForm = () => {
   return (
     <form>
       <div className='mb-2 flex flex-col'>
-        <label className='text-sm font-semibold text-gray-700'>Nombre</label>
-        <input type='text' className='border border-gray-400 rounded-lg w-full p-2 focus:border-pink-400 outline-pink-400/50 outline-4 outline-offset-2' required/>
+        <InputLabel htmlFor="name">Nombre</InputLabel>
+        <Input type='text' name='name' required/>
       </div>
       <div className='mb-2 flex flex-col'>
-        <label className='text-sm font-semibold text-gray-700'>Descripción</label>
-        <input type='text' className='border border-gray-400 rounded-lg w-full p-2 focus:border-pink-400 outline-pink-400/50 outline-4 outline-offset-2' required/>
+        <InputLabel htmlFor="price">Precio</InputLabel>
+        <Input type='text' name='price' required/>
       </div>
       <div className='mb-2 flex flex-col'>
-        <label className='text-sm font-semibold text-gray-700'>Precio</label>
-        <input type='text' className='border border-gray-400 rounded-lg w-full p-2 focus:border-pink-400 outline-pink-400/50 outline-4 outline-offset-2' required/>
+        <InputLabel htmlFor="description">Descripción</InputLabel>
+        <Input type='text' name='description' required/>
       </div>
       <div className='mb-2 flex flex-col'>
-        <label className='text-sm font-semibold text-gray-700'>Cantidad</label>
-        <input type='number' className='border border-gray-400 rounded-lg w-full p-2 focus:border-pink-400 outline-pink-400/50 outline-4 outline-offset-2' required/>
+        <InputLabel htmlFor="quantity">Cantidad</InputLabel>
+        <Input type='number' name='quantity' required/>
+      </div>
+      <div className='mb-2 flex flex-col'>
+        <InputLabel htmlFor='barcode'>Código de barras</InputLabel>
+        <Input type='text' name='barcode' required/>
       </div>
       <div className='mb-2 flex flex-col'>
         <label className='text-sm font-semibold text-gray-700 flex gap-2'>
@@ -32,8 +38,8 @@ const ProductForm = () => {
       {
         isCompound && (
           <div className='mb-2 flex flex-col'>
-            <label className='text-sm font-semibold text-gray-700'>Productos</label>
-            <input type='text' className='border border-gray-400 rounded-lg w-full p-2 focus:border-pink-400 outline-pink-400/50 outline-4 outline-offset-2' required/>
+            <InputLabel htmlFor='items'>Items</InputLabel>
+            <Input type='text' name='items' required/>  
           </div>
         )
       }

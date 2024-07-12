@@ -1,5 +1,6 @@
 import React from 'react'
 import LoginForm from './LoginForm'
+import Link from 'next/link'
 
 const Login = () => {
   return (
@@ -10,7 +11,7 @@ const Login = () => {
           <LoginForm />
         </div>
       </div>
-      <p>¿No tienes cuenta?<a href='/register' className='text-pink-500 text-center ml-1'>Regístrate</a></p>
+      <p>¿No tienes cuenta?<Link href='/register' className='text-pink-500 text-center ml-1'>Regístrate</Link></p>
     </div>
   )
 }

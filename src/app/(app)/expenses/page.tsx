@@ -1,17 +1,17 @@
 import Container from '@/components/Container/Container'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import React from 'react'
+import PageContent from './PageContent'
+import Button from '@/components/Button/Button'
 
 const Expenses = () => {
   return (
     <Container>
       <PageTitle>Gastos</PageTitle>
 
-      <div className="mt-4">
-        <p className="text-gray-500">
-          Listado de gastos
-        </p>
-      </div>
+      <Button href='/expenses/new' variant='primary' className='w-fit'>Registrar gasto</Button>
+
+      <PageContent />
     </Container>
   )
 }

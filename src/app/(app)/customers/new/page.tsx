@@ -45,7 +45,7 @@ const NewCustomer = () => {
     <Container>
       <div className='w-full md:w-4/12 mx-auto'>
         <div className='mb-5'>
-        <a href='/customers' className='rounded-lg p-2 border flex w-fit mb-5'>Volver</a>
+        <Button href='/customers' variant='secondary' className='w-fit mb-5'>Volver</Button>
         <h2 className='text-2xl font-semibold'>Crear cliente</h2>
         </div>
         <form onSubmit={handleSubmit}>

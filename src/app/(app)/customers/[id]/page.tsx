@@ -11,7 +11,7 @@ const CustomerDetail = ({ params }: { params: { id: number} }) => {
   return (
     <Container>
       <div className='w-full md:w-4/12 mx-auto'>
-        <a href='/customers' className="border rounded-lg p-2 flex w-fit mb-4">Volver</a>
+        <Button href='/customers' variant='secondary' className='w-fit mb-5'>Volver</Button>
         {isLoading && <p className='text-lg text-center text-gray-400 animate-pulse'>Cargando...</p>}
         {
           !isLoading && customer && (

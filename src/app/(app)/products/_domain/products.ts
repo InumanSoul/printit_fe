@@ -12,7 +12,8 @@ export const useProducts = () => {
 
   const { data: products, error: allProductsError, isLoading: allProductsLoading } = useSWR('/api/products', () => fetcher('/api/products'), { revalidateOnFocus: false })
 
-  const createCustomer = async (props: any) => {
+  // Create a new product
+  const createProduct = async (props: any) => {
     await axios.get('/sanctum/csrf-cookie')
 
     setErrors([])
@@ -29,17 +30,17 @@ export const useProducts = () => {
     products,
     allProductsError,
     allProductsLoading,
-    createCustomer,
+    createProduct,
     errors,
   }
 }
 
 export const useGetProduct = (id: number) => {
-  const { data: customer, error: singleCustomerError, isLoading: singleCustomerLoading } = useSWR(id ? `/api/products/${id}` : null, () => fetcher(`/api/products/${id}`), { revalidateOnFocus: false })
+  const { data: product, error: singleProductError, isLoading: singleProductLoading } = useSWR(id ? `/api/products/${id}` : null, () => fetcher(`/api/products/${id}`), { revalidateOnFocus: false })
 
   return {
-    customer,
-    error: singleCustomerError,
-    isLoading: singleCustomerLoading,
+    product,
+    error: singleProductError,
+    isLoading: singleProductLoading,
   }
 }
