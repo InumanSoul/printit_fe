@@ -6,9 +6,6 @@ const Preferences = () => {
   return (
     <Container>
 			<PageTitle>Preferencias</PageTitle>
-
-      <Button href="/preferences/categories" variant="primary" className="w-fit">Categorias</Button>
-
     </Container>
   )
 }

@@ -1,5 +1,4 @@
 'use client'
-import { EyeIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 import { useProducts } from '../_domain/products'
 import Link from 'next/link'
@@ -8,9 +7,9 @@ const ProductsList = () => {
   const { products }: any = useProducts()
 
   return (
-    <ul className='w-full md:max-w-3xl mx-auto flex flex-col space-y-2'>
+    <ul className='w-full mx-auto flex flex-col space-y-2'>
       {
-        products?.map((product: any) => (
+        products?.data?.map((product: any) => (
           <li key={product.id} className='border px-3 py-2 rounded-lg flex items-center justify-between hover:bg-gray-50'>
             <Link href={`/products/${product.id}`}>
               <div className='flex gap-3 items-center justify-between'>

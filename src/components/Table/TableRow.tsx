@@ -6,7 +6,7 @@ export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement>
 
 const TableRow = ({ children, ...props }: TableRowProps) => {
   return (
-    <tr {...props} className='bg-white border-b last-of-type:border-b-0 dark:bg-gray-800 dark:border-gray-700'>
+    <tr {...props} className='bg-white hover:bg-neutral-50 border-b last-of-type:border-b-0 dark:bg-neutral-950 dark:hover:bg-neutral-900 dark:border-neutral-700'>
       { children }
     </tr>
   )

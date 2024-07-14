@@ -6,7 +6,7 @@ interface TableHeadProps {
 
 const TableHead = ({ columns }: TableHeadProps) => {
   return (
-    <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+    <thead className='text-xs border-b border-neutral-300 dark:border-neutral-700 text-neutral-700 bg-neutral-50 dark:bg-neutral-900 dark:text-neutral-400'>
       <tr>
         {
           columns.map((column) => (

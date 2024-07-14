@@ -10,8 +10,8 @@ interface TableDataProps extends React.HTMLAttributes<HTMLTableElement>{
 
 const Table = ({ children, data, ...props }: TableDataProps) => {
   return (
-    <div className='relative overflow-x-auto border rounded-xl'>
-      <table {...props} className='w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>
+    <div className='relative overflow-x-auto border border-neutral-300 dark:border-neutral-700 rounded-lg'>
+      <table {...props} className='w-full text-sm text-left rtl:text-right text-neutral-500 dark:text-neutral-400'>
         <TableHead columns={data.columns} />
         <tbody>
           {children}

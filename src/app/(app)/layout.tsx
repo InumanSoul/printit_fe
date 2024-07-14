@@ -14,7 +14,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <main className="flex">
       <SideNav />
-      <section className="px-5 py-8 w-full">
+      <section className="px-6 py-8 w-full bg-white dark:bg-neutral-950">
         {children}
       </section>
     </main>

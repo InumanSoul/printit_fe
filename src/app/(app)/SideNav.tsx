@@ -17,7 +17,7 @@ const SideNav = () => {
   })
 
   return (
-    <aside className="h-dvh w-72 border-r sticky top-0">
+    <aside className="h-dvh w-72 border-r border-neutral-200 dark:border-neutral-700 sticky top-0 dark:bg-neutral-950">
       <Link href={user ? '/sales' : '/'}>
         <Image 
           className="flex mt-5 ml-4 mb-6"
@@ -29,19 +29,24 @@ const SideNav = () => {
         />
       </Link>
       <div className="flex flex-col px-4 mb-5">
-        <button type='button' ref={refs.setReference} onClick={() => setIsOpen(!isOpen)} className="border rounded-lg p-2 w-full flex justify-between items-center gap-2">
+        <button
+          type='button'
+          ref={refs.setReference}
+          onClick={() => setIsOpen(!isOpen)}
+          className="border border-neutral-300 dark:border-neutral-600 rounded-lg p-2 w-full flex justify-between items-center gap-2"
+        >
           <div className="flex gap-2">
-            <div className="size-10 bg-gray-200 rounded-full"></div>
-            <div className='text-left'>
-              <p className="font-semibold">{ user?.name || 'Nombre' }</p>
-              <p className="text-xs text-gray-400">{ user?.company || 'Empresa' }</p>
-            </div>
+            <div className="size-6 bg-neutral-200 dark:bg-neutral-600 rounded-full"></div>            
+            <p className='dark:text-neutral-100'>{ user?.name || 'Nombre' }</p>
           </div>
-          <ChevronRightIcon className="size-5 text-gray-800"/>
+          <ChevronRightIcon className="size-5 text-neutral-800 dark:text-neutral-100"/>
         </button>
       </div>
       { 
-        <div ref={refs.setFloating} className={`${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} duration-150 shadow-lg min-w-40 bg-white border rounded-lg z-50`} style={floatingStyles}>
+        <div 
+          ref={refs.setFloating} 
+          className={`${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} duration-150 shadow-lg min-w-40 bg-white border rounded-lg z-50`} 
+          style={floatingStyles}>
           <ul>
             <li>
               <Link href="/account" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
@@ -49,9 +54,6 @@ const SideNav = () => {
               </Link>
               <Link href="/company" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
                 Empresa
-              </Link>
-              <Link href="/preferences" className="px-4 py-2 flex w-full items-center border-b hover:bg-black/5">
-                Preferencias
               </Link>
               <button type="button" onClick={logout} className="px-4 py-2 flex w-full items-center text-pink-500 hover:bg-black/5">
                 Cerrar sesión

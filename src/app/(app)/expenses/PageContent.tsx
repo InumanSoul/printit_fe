@@ -5,10 +5,12 @@ import TableRow from '@/components/Table/TableRow'
 import React from 'react'
 
 const mockPages = [
+  { label: 'Previous', active: false },
   { label: '1', active: true },
   { label: '2', active: false },
   { label: '3', active: false },
   { label: '4', active: false },
+  { label: 'Next', active: false },
 ]
 
 
@@ -27,7 +29,7 @@ const PageContent = () => {
           ))
         }
       </Table>
-      <Paginator label='Expenses' items={mockPages} />
+      <Paginator items={mockPages} />
     </div>
   )
 }
