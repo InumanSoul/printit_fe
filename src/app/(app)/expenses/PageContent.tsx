@@ -1,4 +1,5 @@
 import Paginator from '@/components/Paginator/Paginator'
+import PaginatorInfo from '@/components/Paginator/PaginatorInfo'
 import Table from '@/components/Table/Table'
 import TableCell from '@/components/Table/TableCell'
 import TableRow from '@/components/Table/TableRow'
@@ -29,7 +30,14 @@ const PageContent = () => {
           ))
         }
       </Table>
-      <Paginator items={mockPages} />
+      <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Customer paginate'>
+        <PaginatorInfo
+          from={1}
+          to={10}
+          total={40}
+        />
+        <Paginator items={mockPages} />
+      </nav>
     </div>
   )
 }

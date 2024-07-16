@@ -10,8 +10,8 @@ const CustomerDetail = ({ params }: { params: { id: number} }) => {
   const { customer, error, isLoading } = useGetCustomer(id)
   return (
     <Container>
-      <div className='w-full md:w-4/12 mx-auto'>
-        <Button href='/customers' variant='secondary' className='w-fit mb-5'>Volver</Button>
+      <div className='w-full md:max-w-3xl mx-auto'>
+        <Button href='/contacts' variant='secondary' className='w-fit mb-5'>Volver</Button>
         {isLoading && <p className='text-lg text-center text-gray-400 animate-pulse'>Cargando...</p>}
         {
           !isLoading && customer && (

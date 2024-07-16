@@ -1,4 +1,4 @@
-export interface Customers {
+export interface Contact {
   id: number,
   name: string,
   email: string,
@@ -9,6 +9,6 @@ export interface Customers {
   company_id: number,
 }
 
-export interface Customers {
-  customers: Customers[],
+export interface Contacts {
+  contacts: Contact[],
 }

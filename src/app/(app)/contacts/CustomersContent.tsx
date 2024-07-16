@@ -2,19 +2,31 @@
 import React from 'react'
 import { useGetCustomers } from './_domain/customers'
 import EmptyState from '@/components/EmptyState/EmptyState'
-import CustomersListSkeleton from './components/CustomersListSkeleton'
-import CustomersList from './components/CustomersList'
 import Paginator from '@/components/Paginator/Paginator'
 import PaginatorInfo from '@/components/Paginator/PaginatorInfo'
 import Input from '@/components/Input/Input'
 import InputLabel from '@/components/InputLabel/InputLabel'
+import ContactsListSkeleton from './components/ContactsListSkeleton'
+import ContactsList from './components/ContactsList'
+import Select from 'react-select'
+
+const customerTypes = [
+  { value: 'all', label: 'Todos' },
+  { value: 'customers', label: 'Clientes' },
+  { value: 'suppliers', label: 'Proveedores' },
+]
+
+const orderOptions = [
+  { value: 'a-z', label: 'A-Z Ascendente' },
+  { value: 'z-a', label: 'Z-A Descendente' },
+]
 
 const CustomersContent = () => {
   const { customers, isLoading, error }: any = useGetCustomers()
   
   return (
     <>
-      {isLoading && <CustomersListSkeleton />}
+      {isLoading && <ContactsListSkeleton />}
       {
         !isLoading && customers?.length === 0 && (
           <EmptyState type='empty' title='No hay contactos registrados' description='Agrega un contacto para comenzar a vender'/>
@@ -52,25 +64,20 @@ const CustomersContent = () => {
                 className='w-full'
               />
             </div>
-            <div>
+            <div className='w-48'>
               <InputLabel>Filtrar</InputLabel>
-              <select className='w-full'>
-                <option value="all">Todos</option>
-                <option value="active">Clientes</option>
-                <option value="inactive">Proveedores</option>
-              </select>
+              <Select 
+                options={customerTypes}
+              />
             </div>
-            <div>
+            <div className='w-48'>
               <InputLabel>Ordenar por</InputLabel>
-              <select className='w-full'>
-                <option value="name">Nombre</option>
-                <option value="created_at">Fecha de creación</option>
-              </select>
+              <Select options={orderOptions}/>
             </div>
           </div>
 
-          <CustomersList 
-            customers={customers?.data} 
+          <ContactsList 
+            contacts={customers?.data} 
           />
           <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Customer paginate'>
             <PaginatorInfo

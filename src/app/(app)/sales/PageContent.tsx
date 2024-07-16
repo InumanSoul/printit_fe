@@ -2,6 +2,10 @@ import Paginator from '@/components/Paginator/Paginator'
 import React from 'react'
 import { mockSales } from './sales.mock'
 import Button from '@/components/Button/Button'
+import Table from '@/components/Table/Table'
+import TableRow from '@/components/Table/TableRow'
+import TableCell from '@/components/Table/TableCell'
+import PaginatorInfo from '@/components/Paginator/PaginatorInfo'
 
 const mockPages = [
   { label: '1', active: true },
@@ -18,66 +22,42 @@ const mockPages = [
 
 const PageContent = () => {
   return (
-    <div className='mt-4'>
-      <div className='relative overflow-x-auto border rounded-xl'>
-        <table className='w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>
-          <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
-            <tr>
-              <th scope='col' className='px-6 py-3'>
-                #
-              </th>
-              <th scope='col' className='px-6 py-3'>
-                Cliente
-              </th>
-              <th scope='col' className='px-6 py-3'>
-                Fecha
-              </th>
-              <th scope='col' className='px-6 py-3'>
-                Monto
-              </th>
-              <th scope='col' className='px-6 py-3'>
-                Acciones
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              mockSales.map((sale) => (
-                <tr key={sale.id} className='bg-white border-b last-of-type:border-b-0 dark:bg-gray-800 dark:border-gray-700'>
-                  <td className='px-6 py-4'>
-                    {sale.id}
-                  </td>
-                  <td 
-                    scope='row'
-                    className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
-                    <div className='flex items-center gap-2'>
-                      <div className='size-10 rounded-full bg-gray-200'></div>
-                      <div>
-                        <h4 className='font-semibold'>
-                          {sale.client}
-                        </h4>
-                        <p className='text-gray-500'>4687201</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className='px-6 py-4'>
-                    <span className='text-gray-900 dark:text-gray-100'>{sale.date}</span>
-                  </td>
-                  <td className='px-6 py-4'>
-                    <span className='text-gray-900 dark:text-gray-100'>{sale.amount}</span>
-                  </td>
-                  <td className='px-6 py-4 flex gap-2'>
-                    <Button variant='secondary'>
-                      Editar
-                    </Button>
-                  </td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
-      <Paginator label='Example' items={mockPages} />
+    <div className='mt-8'>
+      <Table data={{ columns: ['#', 'Cliente', 'Fecha', 'Monto', ''] }}>
+        {
+          mockSales.map((sale, index) => (
+            <TableRow key={index}>
+              <TableCell>{sale.id}</TableCell>
+              <TableCell>
+                <div className='flex items-center gap-2'>
+                  <div className='size-10 rounded-full bg-gray-200'></div>
+                  <div>
+                    <h4 className='font-semibold'>
+                      {sale.client}
+                    </h4>
+                    <p className='text-gray-500'>4687201</p>
+                  </div>
+                </div>
+              </TableCell>
+              <TableCell>{sale.date}</TableCell>
+              <TableCell>{sale.amount}</TableCell>
+              <TableCell>
+                <Button variant='secondary'>
+                  Editar
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))
+        }
+      </Table>
+      <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Customer paginate'>
+        <PaginatorInfo
+          from={1}
+          to={10}
+          total={40}
+        />
+        <Paginator items={mockPages} />
+      </nav>
     </div>
   )
 }

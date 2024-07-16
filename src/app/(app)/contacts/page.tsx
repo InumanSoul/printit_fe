@@ -17,7 +17,7 @@ const Contacts = () => {
     <Container>
       <div className='flex gap-2 items-center justify-between'>
         <div className='flex gap-4 items-center'>
-          <div className='size-16 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center'>
+          <div className='size-16 rounded-xl from-neutral-50 to-neutral-200 bg-gradient-to-br dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center'>
             <UserGroupIcon className='size-8 text-neutral-500 dark:text-neutral-400'/>
           </div>
           <PageTitle>Contactos</PageTitle>

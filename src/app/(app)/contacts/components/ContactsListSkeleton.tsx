@@ -9,7 +9,7 @@ const SkeletonItem = () => {
   )
 }
 
-const CustomersListSkeleton = () => {
+const ContactsListSkeleton = () => {
   return (
     <div className='w-full space-y-4'>
       {
@@ -21,4 +21,4 @@ const CustomersListSkeleton = () => {
   )
 }
 
-export default CustomersListSkeleton
+export default ContactsListSkeleton

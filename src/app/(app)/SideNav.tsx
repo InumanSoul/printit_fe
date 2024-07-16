@@ -17,7 +17,7 @@ const SideNav = () => {
   })
 
   return (
-    <aside className="h-dvh w-72 border-r border-neutral-200 dark:border-neutral-700 sticky top-0 dark:bg-neutral-950">
+    <aside className="h-dvh w-full md:w-72 bg-white border-r border-neutral-200 dark:border-neutral-700 sticky top-0 dark:bg-neutral-950">
       <Link href={user ? '/sales' : '/'}>
         <Image 
           className="flex mt-5 ml-4 mb-6"
