@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { useGetCustomers } from './_domain/customers'
 import EmptyState from '@/components/EmptyState/EmptyState'
 import Paginator from '@/components/Paginator/Paginator'
@@ -22,7 +22,8 @@ const orderOptions = [
 ]
 
 const CustomersContent = () => {
-  const { customers, isLoading, error }: any = useGetCustomers()
+  const [pageNumber, setPageNumber] = useState(1)
+  const { customers, isLoading, error }: any = useGetCustomers({ pageNumber: pageNumber })
   
   return (
     <>
@@ -85,7 +86,7 @@ const CustomersContent = () => {
               to={customers?.to}
               total={customers?.total}
             />
-            <Paginator items={customers?.links} />
+            <Paginator setter={setPageNumber} items={customers?.links} />
           </nav>
         </>
       }

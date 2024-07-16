@@ -5,8 +5,8 @@ import { fetcher } from '../../_infraestructure/fetcher'
 import axios from '@/configs/axios'
 import { useRouter } from 'next/navigation'
 
-export const useGetCustomers = () => {
-  const { data, error, isLoading } = useSWR('/api/customers', () => fetcher('/api/customers'), { revalidateOnFocus: false })
+export const useGetCustomers = ({ pageNumber }) => {
+  const { data, error, isLoading } = useSWR(`/api/customers?page=${pageNumber}`, fetcher, { revalidateOnFocus: false })
 
   return {
     customers: data,

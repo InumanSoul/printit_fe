@@ -43,10 +43,10 @@ const NewCustomer = () => {
 
   return (
     <Container>
-      <div className='w-full md:w-4/12 mx-auto'>
+      <div className='w-full md:max-w-lg mx-auto'>
         <div className='mb-5'>
-        <Button href='/customers' variant='secondary' className='w-fit mb-5'>Volver</Button>
-        <h2 className='text-2xl font-semibold'>Crear cliente</h2>
+        <Button href='/contacts' variant='secondary' className='w-fit mb-5'>Volver</Button>
+        <h2 className='text-2xl font-semibold dark:text-neutral-50'>Registrar contacto</h2>
         </div>
         <form onSubmit={handleSubmit}>
           <div className='mb-2 flex flex-col'>

@@ -6,7 +6,7 @@ import { PlusIcon } from '@heroicons/react/24/outline'
 const Categories = () => {
   return (
     <div className='my-10'>
-      <p className='text-gray-500 mb-5'>
+      <p className='text-neutral-500 mb-5'>
         Aquí encontrarás categorías que pueden usarse en el registro de productos y gastos, tienes algunas predefinidas y puedes agregar más según necesites.
       </p>
       <CategoriesList />

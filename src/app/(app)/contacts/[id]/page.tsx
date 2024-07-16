@@ -12,17 +12,17 @@ const CustomerDetail = ({ params }: { params: { id: number} }) => {
     <Container>
       <div className='w-full md:max-w-3xl mx-auto'>
         <Button href='/contacts' variant='secondary' className='w-fit mb-5'>Volver</Button>
-        {isLoading && <p className='text-lg text-center text-gray-400 animate-pulse'>Cargando...</p>}
+        {isLoading && <p className='text-lg text-center text-neutral-400 animate-pulse'>Cargando...</p>}
         {
           !isLoading && customer && (
-            <div className='border rounded-2xl max-w-xl mx-auto'>
+            <div className='border dark:text-neutral-50 dark:border-neutral-700 rounded-2xl max-w-xl mx-auto'>
               <div className='p-5'>
                 <h2 className='text-2xl font-bold'>{customer?.name}</h2>
                 <p>{ customer.address }</p>
                 <p>{ customer.email }</p>
                 <p>{ customer.phone }</p>
               </div>
-              <div className='border-t p-5 flex gap-2'>
+              <div className='border-t dark:border-neutral-700 p-5 flex gap-2'>
                 <Button variant='secondary'>Editar</Button>
                 <Button variant='danger'>Eliminar</Button>
               </div>
