@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { useGetCustomers } from './_domain/customers'
+import { useGetContacts } from './_domain/contacts'
 import EmptyState from '@/components/EmptyState/EmptyState'
 import Paginator from '@/components/Paginator/Paginator'
 import PaginatorInfo from '@/components/Paginator/PaginatorInfo'
@@ -21,15 +21,15 @@ const orderOptions = [
   { value: 'z-a', label: 'Z-A Descendente' },
 ]
 
-const CustomersContent = () => {
+const ContactsContent = () => {
   const [pageNumber, setPageNumber] = useState(1)
-  const { customers, isLoading, error }: any = useGetCustomers({ pageNumber: pageNumber })
+  const { contacts, isLoading, error }: any = useGetContacts({ pageNumber: pageNumber })
   
   return (
     <>
       {isLoading && <ContactsListSkeleton />}
       {
-        !isLoading && customers?.length === 0 && (
+        !isLoading && contacts?.length === 0 && (
           <EmptyState type='empty' title='No hay contactos registrados' description='Agrega un contacto para comenzar a vender'/>
         )
       }
@@ -39,12 +39,12 @@ const CustomersContent = () => {
         )
       }
       {
-        (!isLoading && customers?.data?.length > 0) &&
+        (!isLoading && contacts?.data?.length > 0) &&
         <>
           <div className='grid grid-cols-12 my-10'>
             <div className='col-span-12 md:col-span-4'>
               <h5 className='text-sm text-neutral-500'>Total</h5>
-              <p className="text-xl dark:text-gray-100">{customers?.total}</p>
+              <p className="text-xl dark:text-gray-100">{contacts?.total}</p>
             </div>
             <div className='col-span-12 md:col-span-4'>
               <h5 className='text-sm text-neutral-500'>Nuevos</h5>
@@ -78,15 +78,15 @@ const CustomersContent = () => {
           </div>
 
           <ContactsList 
-            contacts={customers?.data} 
+            contacts={contacts?.data} 
           />
           <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Customer paginate'>
             <PaginatorInfo
-              from={customers?.from}
-              to={customers?.to}
-              total={customers?.total}
+              from={contacts?.from}
+              to={contacts?.to}
+              total={contacts?.total}
             />
-            <Paginator setter={setPageNumber} items={customers?.links} />
+            <Paginator setter={setPageNumber} items={contacts?.links} />
           </nav>
         </>
       }
@@ -94,4 +94,4 @@ const CustomersContent = () => {
   )
 }
 
-export default CustomersContent
+export default ContactsContent

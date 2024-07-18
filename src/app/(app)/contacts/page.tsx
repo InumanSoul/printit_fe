@@ -3,9 +3,9 @@ import PageTitle from '@/components/PageTitle/PageTitle'
 import React from 'react'
 import { Metadata } from 'next';
 import Button from '@/components/Button/Button';
-import CustomersContent from './CustomersContent';
 import { UserGroupIcon } from '@heroicons/react/24/outline';
 
+import ContactsContent from './ContactsContent';
 export const metadata: Metadata = {
   title: "Contactos",
   description: "Directorio de contactos disponibles",
@@ -28,7 +28,7 @@ const Contacts = () => {
       </div>
 
       <div className='my-6'>
-        <CustomersContent />
+        <ContactsContent />
       </div>
     </Container>
   )

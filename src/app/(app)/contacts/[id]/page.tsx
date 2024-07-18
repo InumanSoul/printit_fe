@@ -2,12 +2,22 @@
 
 import Container from '@/components/Container/Container'
 import React from 'react'
-import { useGetCustomer } from '../_domain/customers'
+import { useDeleteContact, useGetContact } from '../_domain/contacts'
 import Button from '@/components/Button/Button'
 
 const CustomerDetail = ({ params }: { params: { id: number} }) => {
   const { id } = params
-  const { customer, error, isLoading } = useGetCustomer(id)
+  const { customer, error, isLoading } = useGetContact(id)
+  const { deleteContact } = useDeleteContact()
+
+  const handleDelete = () => {
+    try {
+      deleteContact(id)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <Container>
       <div className='w-full md:max-w-3xl mx-auto'>
@@ -24,7 +34,7 @@ const CustomerDetail = ({ params }: { params: { id: number} }) => {
               </div>
               <div className='border-t dark:border-neutral-700 p-5 flex gap-2'>
                 <Button variant='secondary'>Editar</Button>
-                <Button variant='danger'>Eliminar</Button>
+                <Button variant='danger' onClick={handleDelete}>Eliminar</Button>
               </div>
             </div>
           )
