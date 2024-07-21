@@ -55,7 +55,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } : UseAuthParams 
         await csrf()
 
         setErrors([])
-        setStatus(null)
+        setStatus('loading')
 
         axios
             .post('/login', {
@@ -63,10 +63,13 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } : UseAuthParams 
                 password,
                 remember
             })
-            .then(() => mutate())
+            .then(() => {
+                mutate()
+                setStatus('success')
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
-
+                setStatus(null)
                 setErrors(error.response.data.errors)
             })
     }

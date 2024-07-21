@@ -9,21 +9,25 @@ import InputLabel from '@/components/InputLabel/InputLabel'
 import ContactsListSkeleton from './components/ContactsListSkeleton'
 import ContactsList from './components/ContactsList'
 import Select from 'react-select'
+import { formatDateTime, SelectTheme } from '@/utils'
 
-const customerTypes = [
+const contactsTypes = [
   { value: 'all', label: 'Todos' },
-  { value: 'customers', label: 'Clientes' },
-  { value: 'suppliers', label: 'Proveedores' },
-]
-
-const orderOptions = [
-  { value: 'a-z', label: 'A-Z Ascendente' },
-  { value: 'z-a', label: 'Z-A Descendente' },
+  { value: 'customer', label: 'Clientes' },
+  { value: 'supplier', label: 'Proveedores' },
 ]
 
 const ContactsContent = () => {
   const [pageNumber, setPageNumber] = useState(1)
-  const { contacts, isLoading, error }: any = useGetContacts({ pageNumber: pageNumber })
+  const [contactsType, setContactsType] = useState(contactsTypes[0])
+  const { contacts, isLoading, error }: any = useGetContacts({ 
+    pageNumber: pageNumber,
+    contactsType: contactsType.value,
+    querySearch: ''
+   })
+  
+
+  console.log(contacts?.data?.data);
   
   return (
     <>
@@ -39,20 +43,20 @@ const ContactsContent = () => {
         )
       }
       {
-        (!isLoading && contacts?.data?.length > 0) &&
+        (!isLoading && contacts?.data?.data?.length > 0) &&
         <>
           <div className='grid grid-cols-12 my-10'>
             <div className='col-span-12 md:col-span-4'>
               <h5 className='text-sm text-neutral-500'>Total</h5>
-              <p className="text-xl dark:text-gray-100">{contacts?.total}</p>
+              <p className="text-xl dark:text-gray-100">{contacts?.data?.total}</p>
             </div>
             <div className='col-span-12 md:col-span-4'>
               <h5 className='text-sm text-neutral-500'>Nuevos</h5>
-              <p className="text-xl dark:text-gray-100">123</p>
+              <p className="text-xl dark:text-gray-100">{contacts?.recently_added}</p>
             </div>
             <div className='col-span-12 md:col-span-4'>
               <h5 className='text-sm text-neutral-500'>Ultima actualización</h5>
-              <p className="text-xl dark:text-gray-100">14 de Julio</p>
+              <p className="text-xl dark:text-gray-100">{formatDateTime(contacts?.last_update)}</p>
             </div>
           </div>
 
@@ -68,25 +72,24 @@ const ContactsContent = () => {
             <div className='w-48'>
               <InputLabel>Filtrar</InputLabel>
               <Select 
-                options={customerTypes}
+                options={contactsTypes}
+                defaultValue={contactsTypes[0]}
+                theme={SelectTheme}
+                onChange={(option: any) => setContactsType(option)}
               />
-            </div>
-            <div className='w-48'>
-              <InputLabel>Ordenar por</InputLabel>
-              <Select options={orderOptions}/>
             </div>
           </div>
 
           <ContactsList 
-            contacts={contacts?.data} 
+            contacts={contacts?.data?.data} 
           />
           <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Customer paginate'>
             <PaginatorInfo
-              from={contacts?.from}
-              to={contacts?.to}
-              total={contacts?.total}
+              from={contacts?.data?.from}
+              to={contacts?.data?.to}
+              total={contacts?.data?.total}
             />
-            <Paginator setter={setPageNumber} items={contacts?.links} />
+            <Paginator setter={setPageNumber} items={contacts?.data?.links} />
           </nav>
         </>
       }

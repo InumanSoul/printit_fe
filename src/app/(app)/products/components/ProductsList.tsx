@@ -18,7 +18,7 @@ const ProductsList = () => {
                   <img src={product.image} alt={product.name} className='w-full h-full object-fill'/>
                 </div>
                 <div className='flex-1'>
-                  <h5 className='font-semibold text-lg text-neutral-50'>{product.name}</h5>
+                  <h5 className='font-semibold text-lg dark:text-neutral-50'>{product.name}</h5>
                   <p className='text-neutral-400 text-sm'>{product.description}</p>
                   <p className='text-neutral-800 dark:text-neutral-300'>
                     Precio: <span className='font-semibold'>{product.price}</span>

@@ -1,6 +1,7 @@
 'use client'
 
 import Button from '@/components/Button/Button'
+import { DatePickerTheme } from '@/utils'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import React from 'react'
@@ -16,17 +17,7 @@ const Login = () => {
     clearBtnText: "Borrar",
     maxDate: new Date("2030-01-01"),
     minDate: new Date("1950-01-01"),
-    theme: {
-      background: "bg-white",
-      todayBtn: "",
-      clearBtn: "",
-      icons: "",
-      text: "",
-      disabledText: "bg-neutral-200 dark:bg-neutral-600 text-neutral-400 dark:text-neutral-500",
-      input: "",
-      inputIcon: "",
-      selected: "bg-green-500 hover:bg-green-400",
-    },
+    theme: DatePickerTheme,
     icons: {
       prev: () => <ArrowLeftIcon className='size-5 text-neutral-900 dark:text-neutral-50' />,
       next: () => <ArrowRightIcon className='size-5 text-neutral-900 dark:text-neutral-50' />,

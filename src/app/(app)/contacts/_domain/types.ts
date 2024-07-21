@@ -7,6 +7,7 @@ export interface Contact {
   document: string,
   user_id: number,
   company_id: number,
+  contacts_type: string,
 }
 
 export interface Contacts {

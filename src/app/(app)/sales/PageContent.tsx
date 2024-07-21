@@ -30,7 +30,7 @@ const PageContent = () => {
               <TableCell>{sale.id}</TableCell>
               <TableCell>
                 <div className='flex items-center gap-2'>
-                  <div className='size-10 rounded-full bg-gray-200'></div>
+                  <div className='size- rounded-full bg-gray-200'></div>
                   <div>
                     <h4 className='font-semibold'>
                       {sale.client}

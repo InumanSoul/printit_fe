@@ -5,8 +5,24 @@ import { fetcher } from '../../_infraestructure/fetcher'
 import axios from '@/configs/axios'
 import { useRouter } from 'next/navigation'
 
-export const useGetContacts = ({ pageNumber }) => {
-  const { data, error, isLoading } = useSWR(`/api/contacts?page=${pageNumber}`, fetcher, { revalidateOnFocus: false })
+export const useGetContacts = ({ pageNumber, contactsType, querySearch }) => {
+  const queryParams = {};
+  
+  if (contactsType !== undefined && contactsType !== 'all') {
+    queryParams['contacts_type'] = contactsType;
+  }
+  if (pageNumber !== undefined) {
+    queryParams['page'] = pageNumber;
+  }
+  if (querySearch !== undefined && querySearch !== '' && querySearch.length > 2) {
+    queryParams['query'] = querySearch;
+  }
+
+  const queryString = Object.keys(queryParams)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(queryParams[key])}`)
+    .join('&');
+  
+  const { data, error, isLoading } = useSWR(`/api/contacts?${queryString}`, fetcher, { revalidateOnFocus: false })
 
   return {
     contacts: data,

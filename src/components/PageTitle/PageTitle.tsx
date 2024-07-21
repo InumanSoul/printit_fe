@@ -1,8 +1,15 @@
 import React from 'react'
 
-const PageTitle = ({ children } : { children: React.ReactNode }) => {
+interface PageTitleProps {
+  children: React.ReactNode
+  className?: string
+}
+
+const PageTitle = ({ children, className } : PageTitleProps) => {
   return (
-    <h2 className="text-3xl font-bold dark:text-gray-50">
+    <h2 className={
+      `text-3xl font-semibold text-gray-800 dark:text-gray-100 ${className}`
+    }>
       {children}
     </h2>
   )
