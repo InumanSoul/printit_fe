@@ -11,9 +11,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = ({ children, variant, disabled, href, target, size, ...props }: ButtonProps) => {
   const buttonVariants = {
-    primary: 'bg-pink-500 disabled:hover:bg-pink-500 hover:bg-pink-600 hover:active:bg-pink-700 text-white dark:bg-pink-700 dark:hover:bg-pink-800 dark:hover:active:bg-pink-900 dark:text-neutral-50',
-    link: 'bg-transparent disabled:hover:text-transparent hover:text-pink-600 hover:active:text-pink-700 text-pink-500',
-    secondary: 'bg-transparent disabled:hover:bg-transparent hover:bg-neutral-50 hover:active:bg-neutral-100 text-neutral-800 border rounded-lg p-2 flex dark:border-neutral-600 dark:text-neutral-50 dark:hover:bg-neutral-800',
+    primary: 'bg-rose-500 disabled:hover:bg-rose-500 hover:bg-rose-600 hover:active:bg-rose-700 text-white dark:bg-rose-700 dark:hover:bg-rose-800 dark:hover:active:bg-rose-900 dark:text-neutral-50',
+    link: 'bg-transparent disabled:hover:text-transparent hover:text-rose-600 hover:active:text-rose-700 text-rose-500',
+    secondary: 'bg-transparent disabled:hover:bg-transparent hover:bg-neutral-50 hover:active:bg-neutral-100 text-neutral-800 border rounded-lg p-2 flex dark:border-neutral-600 dark:text-neutral-50 dark:hover:bg-neutral-800 dark:hover:active:bg-neutral-900',
     danger: 'bg-red-500 disabled:hover:bg-red-500 hover:bg-red-600 hover:active:bg-red-700 text-white rounded-lg p-2 flex',
   }
 

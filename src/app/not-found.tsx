@@ -5,7 +5,7 @@ const NotFound = () => {
   return (
     <div className="w-full h-dvh flex justify-center items-center">
       <div>
-        <h2 className="text-6xl text-pink-500 font-bold">
+        <h2 className="text-6xl text-rose-500 font-bold">
           404
         </h2>
 
@@ -15,7 +15,7 @@ const NotFound = () => {
           </p>
         </div>
           
-        <Link href="/customers" className="bg-pink-500 text-white rounded-lg p-2 w-full">Volver al inicio</Link>
+        <Link href="/customers" className="bg-rose-500 text-white rounded-lg p-2 w-full">Volver al inicio</Link>
       </div>
     </div>
   )

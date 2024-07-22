@@ -31,7 +31,7 @@ const ProductForm = () => {
       </div>
       <div className='mb-2 flex flex-col'>
         <label className='text-sm font-semibold text-gray-700 flex gap-2'>
-          <input type='checkbox' className='bg-pink-500' checked={isCompound} onChange={e => setIsCompound(!isCompound)} required/>
+          <input type='checkbox' className='bg-rose-500' checked={isCompound} onChange={e => setIsCompound(!isCompound)} required/>
           Producto compuesto
         </label>
       </div>
@@ -44,7 +44,7 @@ const ProductForm = () => {
         )
       }
       <div className='mb-2'>
-        <button className='bg-pink-500 text-white rounded-lg p-2 flex w-fit'>Guardar producto</button>
+        <button className='bg-rose-500 text-white rounded-lg p-2 flex w-fit'>Guardar producto</button>
       </div>
     </form>
   )

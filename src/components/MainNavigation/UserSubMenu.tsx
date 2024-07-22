@@ -48,7 +48,7 @@ const UserSubMenu = () => {
               <Link href="/company" className="px-4 py-2 flex w-full items-center border-b hover:bg-neutral-50 dark:hover:bg-neutral-700 dark:border-neutral-700">
                 Empresa
               </Link>
-              <button type="button" onClick={logout} className="px-4 py-2 flex w-full items-center text-pink-500 hover:bg-neutral-50 dark:hover:bg-neutral-700 dark:border-neutral-700">
+              <button type="button" onClick={logout} className="px-4 py-2 flex w-full items-center text-rose-500 hover:bg-neutral-50 dark:hover:bg-neutral-700 dark:border-neutral-700">
                 Cerrar sesión
               </button>
             </li>

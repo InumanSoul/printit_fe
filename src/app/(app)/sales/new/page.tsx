@@ -16,15 +16,15 @@ const NewSale = () => {
             Volver 
           </Button>
 					<form className='mt-8'>
-            <h3 className='text-xl font-semibold mb-4'>Detalles de la venta</h3>
-						<div className='flex flex-col pb-8 border-b mb-8'>
+            <h3 className='text-xl font-semibold mb-4 dark:text-neutral-50'>Detalles de la venta</h3>
+						<div className='flex flex-col pb-8 border-b dark:border-neutral-700 mb-8'>
 							<InputLabel>Clientes</InputLabel>
 							<div className='relative'>
 								<Input
 									type='search'
 									placeholder='Buscar cliente'
 									icon={
-										<MagnifyingGlassIcon className='size-6 absolute top-2 right-2' />
+										<MagnifyingGlassIcon className='size-6 absolute top-2 right-2 dark:text-neutral-200' />
 									}
 									className='w-full'
 									required
@@ -32,14 +32,14 @@ const NewSale = () => {
 							</div>
 						</div>
             <div className='flex flex-col'>
-              <h3 className='text-xl font-semibold mb-4'>Productos</h3>
+              <h3 className='text-xl font-semibold mb-4 dark:text-neutral-50'>Productos</h3>
               <InputLabel>Items</InputLabel>
               <div className='relative'>
                 <Input
                   type='search'
                   placeholder='Buscar producto'
                   icon={
-                    <MagnifyingGlassIcon className='size-6 absolute top-2 right-2' />
+                    <MagnifyingGlassIcon className='size-6 absolute top-2 right-2 dark:text-neutral-200' />
                   }
                   className='w-full'
                   required
@@ -50,7 +50,7 @@ const NewSale = () => {
                 Nuevo item
               </Button>
             </div>
-            <div className='flex gap-2 border-t mt-5'>
+            <div className='flex gap-2 border-t dark:border-neutral-700 mt-5'>
               <Button variant='secondary' className='w-fit mt-4'>
                 Guardar borrador
               </Button>

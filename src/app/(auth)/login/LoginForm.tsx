@@ -50,15 +50,15 @@ const LoginForm = () => {
         <InputError messages={errors.password} className='mt-2'/>
       </div>
       <div className='flex flex-col'>
-        <label className='text-sm font-semibold text-gray-700 flex gap-2'>
-          <input type='checkbox' className='bg-pink-500' defaultChecked={shouldRemember} onChange={e => setShouldRemember(!shouldRemember)}/>
+        <label className='text-sm font-semibold text-neutral-500 flex gap-2'>
+          <input type='checkbox' className='bg-rose-500' defaultChecked={shouldRemember} onChange={e => setShouldRemember(!shouldRemember)}/>
           Recordarme
         </label>
       </div>
       <Button variant='primary' className='w-full' disabled={status === 'loading'}>
         {status === 'loading' ? <ArrowPathIcon className='size-4 animate-spin' /> : 'Iniciar sesión'}
       </Button>
-      <Link href='/forgot-password' className='text-pink-500 text-center mt-3 w-full block'>¿Olvidaste tu contraseña?</Link>
+      <Link href='/forgot-password' className='text-rose-500 text-center mt-3 w-full block'>¿Olvidaste tu contraseña?</Link>
     </form>
   )
 }
