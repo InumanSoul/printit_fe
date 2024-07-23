@@ -16,7 +16,7 @@ const LoginForm = () => {
   })
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const [shouldRemember, setShouldRemember] = React.useState(false)
+  const [shouldRemember, setShouldRemember] = React.useState(true)
   const [errors, setErrors] = React.useState(
     {
       email: [],
@@ -50,10 +50,10 @@ const LoginForm = () => {
         <InputError messages={errors.password} className='mt-2'/>
       </div>
       <div className='flex flex-col'>
-        <label className='text-sm font-semibold text-neutral-500 flex gap-2'>
-          <input type='checkbox' className='bg-rose-500' defaultChecked={shouldRemember} onChange={e => setShouldRemember(!shouldRemember)}/>
-          Recordarme
-        </label>
+        <InputLabel>
+          <input type='checkbox' className='rounded bg-neutral-50 active:bg-rose-500 checked:bg-rose-500 hover:checked:bg-rose-600 hover:checked:focus:bg-rose-500 hover:bg-neutral-200 hover:focus:bg-rose-500 focus:checked:bg-rose-500 outline-none focus:ring-2 focus:ring-rose-500/35 focus:ring-offset-1 duration-200' defaultChecked={shouldRemember} onChange={e => setShouldRemember(!shouldRemember)}/>
+          <span className='ms-1'>Recordarme</span>
+        </InputLabel>
       </div>
       <Button variant='primary' className='w-full' disabled={status === 'loading'}>
         {status === 'loading' ? <ArrowPathIcon className='size-4 animate-spin' /> : 'Iniciar sesión'}

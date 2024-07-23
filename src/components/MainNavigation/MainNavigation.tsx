@@ -11,10 +11,10 @@ const MainNavigation = () => {
   const menuItems = [
     { href: '/sales', icon: ArrowUpCircleIcon, text: 'Ingresos' },
     { href: '/expenses', icon: ArrowDownCircleIcon, text: 'Gastos' },
-    { href: '/reports', icon: ChartBarIcon, text: 'Reportes' },
     { href: '/contacts', icon: UserGroupIcon, text: 'Contactos' },
     { href: '/products', icon: CubeIcon, text: 'Productos' },
-    { href: '/preferences', icon: Cog8ToothIcon, text: 'Preferencias' },
+    { href: '/reports', icon: ChartBarIcon, text: 'Reportes' },
+    { href: '/preferences/categories', icon: Cog8ToothIcon, text: 'Preferencias' },
   ]
   
   return (

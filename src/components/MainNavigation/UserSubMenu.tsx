@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import { useFloating, useDismiss, useInteractions } from "@floating-ui/react";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftEndOnRectangleIcon, BuildingOffice2Icon, ChevronRightIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -36,19 +36,22 @@ const UserSubMenu = () => {
       { 
         <div 
           ref={refs.setFloating} 
-          className={`${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} duration-150 shadow-lg min-w-40 bg-white dark:bg-neutral-800 border dark:border-neutral-700 dark:text-neutral-50 rounded-lg z-50`} 
+          className={`${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} duration-150 shadow-lg min-w-40 bg-white dark:bg-neutral-800 border dark:border-neutral-700 dark:text-neutral-50 rounded-lg`} 
           style={floatingStyles}
           {...getFloatingProps()}        
         >
           <ul>
             <li>
               <Link href="/account" className="px-4 py-2 flex w-full items-center border-b hover:bg-neutral-50 dark:hover:bg-neutral-700 dark:border-neutral-700">
+                <UserCircleIcon className="size-5 me-2"/>
                 Mi cuenta
               </Link>
               <Link href="/company" className="px-4 py-2 flex w-full items-center border-b hover:bg-neutral-50 dark:hover:bg-neutral-700 dark:border-neutral-700">
+                <BuildingOffice2Icon className="size-5 me-2"/>
                 Empresa
               </Link>
               <button type="button" onClick={logout} className="px-4 py-2 flex w-full items-center text-rose-500 hover:bg-neutral-50 dark:hover:bg-neutral-700 dark:border-neutral-700">
+                <ArrowLeftEndOnRectangleIcon className="size-5 me-2"/>
                 Cerrar sesión
               </button>
             </li>

@@ -1,15 +1,20 @@
-import Container from '@/components/Container/Container'
+'use client'
 
-export const metadata = {
-  title: 'Printit: Mi cuenta',
-}
+import Container from '@/components/Container/Container'
+import { useAuth } from '@/hooks/useAuth'
 
 const Account = () => {
+  const { user } = useAuth()
   return (
     <Container>
       <div className='w-full md:w-5/12 mx-auto'>
         <div className='border-b py-5'>
-          <h2 className='text-3xl font-bold'>Nombre Usuario</h2>
+          <div className='size-20 rounded-full bg-neutral-200 mb-5'>
+
+          </div>
+          <h2 className='text-3xl font-bold'>
+            {user?.name}
+          </h2>
           <p className='text-gray-500'>Nombre empresa</p>
         </div>
         <div className="py-5">
@@ -17,7 +22,7 @@ const Account = () => {
             <p className='font-semibold'>Email</p>
             <p className='ml-2'>
               <a href='mailto:example@example.com'>
-                example@example.com
+                {user?.email}
               </a>
             </p>
           </div>

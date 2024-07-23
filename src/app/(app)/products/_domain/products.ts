@@ -6,11 +6,25 @@ import axios from '@/configs/axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-export const useProducts = () => {
+export const useProducts = ({ pageNumber, querySearch }: { pageNumber: number, querySearch?: string }) => {
   const router = useRouter()
   const [errors, setErrors] = useState([])
 
-  const { data: products, error: allProductsError, isLoading: allProductsLoading } = useSWR('/api/products', () => fetcher('/api/products'), { revalidateOnFocus: false })
+  const queryParams: { [key: string]: number | string } = {}
+  
+  if (pageNumber !== undefined) {
+    queryParams['page'] = pageNumber;
+  }
+  
+  if (querySearch !== undefined && querySearch !== '' && querySearch.length > 2) {
+    queryParams['query'] = querySearch;
+  }
+
+  const queryString = Object.keys(queryParams)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(queryParams[key])}`)
+    .join('&');
+    
+  const { data: products, error: allProductsError, isLoading: allProductsLoading } = useSWR(`/api/products?${queryString}`, fetcher, { revalidateOnFocus: false })
 
   // Create a new product
   const createProduct = async (props: any) => {

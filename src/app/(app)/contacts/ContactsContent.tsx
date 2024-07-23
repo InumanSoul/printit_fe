@@ -20,20 +20,18 @@ const contactsTypes = [
 const ContactsContent = () => {
   const [pageNumber, setPageNumber] = useState(1)
   const [contactsType, setContactsType] = useState(contactsTypes[0])
+  const [querySearch, setQuerySearch] = useState('')
   const { contacts, isLoading, error }: any = useGetContacts({ 
     pageNumber: pageNumber,
     contactsType: contactsType.value,
-    querySearch: ''
+    querySearch: querySearch
    })
-  
-
-  console.log(contacts?.data?.data);
   
   return (
     <>
       {isLoading && <ContactsListSkeleton />}
       {
-        !isLoading && contacts?.length === 0 && (
+        !isLoading && contacts?.data?.data.length === 0 && (
           <EmptyState type='empty' title='No hay contactos registrados' description='Agrega un contacto para comenzar a vender'/>
         )
       }
@@ -65,6 +63,8 @@ const ContactsContent = () => {
               <InputLabel>Buscar</InputLabel>
               <Input 
                 type='search'
+                value={querySearch}
+                onChange={(e: any) => setQuerySearch(e.target.value)}
                 placeholder='Buscar cliente'
                 className='w-full'
               />
@@ -74,7 +74,19 @@ const ContactsContent = () => {
               <Select 
                 options={contactsTypes}
                 defaultValue={contactsTypes[0]}
-                theme={SelectTheme}
+                isSearchable={false}
+                unstyled
+                classNames={{
+                  control: ({ isFocused }) =>
+                    isFocused ? "border border-rose-500 dark:border:rose-600 outline-rose-400/50 ring-2 ring-rose-500/35 ring-offset-1 rounded-md px-3 py-2 bg-white dark:bg-neutral-800 dark:text-neutral-50" : 
+                    "border border-neutral-400 dark:border:neutral-700 rounded-md px-3 py-2 bg-white dark:bg-neutral-800 dark:text-neutral-50",
+                  menu: () => "rounded-md bg-white dark:bg-neutral-700 border border-neutral-400 dark:border:neutral-700 cursor-pointer overflow-hidden",
+                  option: ({ isFocused, isSelected }) =>
+                      isFocused ? "px-3 py-2 bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-50" :
+                      isSelected ? "px-3 py-2 bg-rose-500 dark:bg-rose-700 text-white dark:text-neutral-50" :
+                      "px-3 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:text-neutral-50",
+                  
+                }}
                 onChange={(option: any) => setContactsType(option)}
               />
             </div>

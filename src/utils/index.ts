@@ -8,7 +8,7 @@ export const parseDatabaseBoolean = (value: string | number | boolean) => {
 
 export const DatePickerTheme = {
   background: "bg-white dark:bg-neutral-800",
-  todayBtn: "bg-green-500 dark:bg-green-700 hover:bg-green-600 dark:hover:bg-green-800",
+  todayBtn: "bg-rose-500 dark:bg-rose-700 hover:bg-rose-600 dark:hover:bg-rose-800",
   clearBtn: "bg-white dark:bg-neutral-800",
   icons: "bg-white dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700",
   text: "",
@@ -28,11 +28,11 @@ export const SelectTheme = (theme: any) => ({
   },
   colors: {
     ...theme.colors,
-    primary: 'rgb(236 72 153)',
-    primary25: 'rgb(252 231 243)',
+    primary: '#f43f5e',
+    primary25: '#fff1f2',
   },
 })
 
 export const formatDateTime = (date: string) => {
-  return new Date(date).toLocaleDateString('es-ES')
+  return new Date(date).toLocaleDateString('es-PY')
 }

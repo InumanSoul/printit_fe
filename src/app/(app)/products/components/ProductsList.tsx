@@ -1,16 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 import React from 'react'
-import { useProducts } from '../_domain/products'
 import Link from 'next/link'
 
-const ProductsList = () => {
-  const { products }: any = useProducts()
+const ProductsList = ({ products }: any) => {
 
   return (
     <ul className='w-full mx-auto flex flex-col space-y-2'>
       {
-        products?.data?.map((product: any) => (
+        products?.data.map((product: any) => (
           <li key={product.id} className='border duration-200 dark:border-neutral-700 px-3 py-2 rounded-lg flex items-center justify-between hover:bg-neutral-50 dark:hover:bg-neutral-900'>
             <Link href={`/products/${product.id}`}>
               <div className='flex gap-3 items-center justify-between'>

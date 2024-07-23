@@ -1,3 +1,5 @@
+import Input from '@/components/Input/Input'
+import InputLabel from '@/components/InputLabel/InputLabel'
 import Paginator from '@/components/Paginator/Paginator'
 import PaginatorInfo from '@/components/Paginator/PaginatorInfo'
 import Table from '@/components/Table/Table'
@@ -18,6 +20,16 @@ const mockPages = [
 const PageContent = () => {
   return (
     <div className='mt-8'>
+      <div className='flex gap-4 mb-4'>
+        <div className='flex-1'>
+          <InputLabel>Buscar</InputLabel>
+          <Input 
+            type='search'
+            placeholder='Buscar gastos'
+            className='w-full'
+          />
+        </div>
+      </div>
       <Table data={{ columns: ['Fecha', 'Proveedor', 'Descripción', 'Monto'] }}>
         {
           [1, 2, 3, 4, 5].map((item, index) => (

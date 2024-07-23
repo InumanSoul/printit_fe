@@ -15,7 +15,7 @@ const EmptyState = ({ title, description, type } : EmptyStateProps) => {
 
   return (
     <div className="mt-4 h-56 flex items-center justify-center">
-      <div className="text-gray-500 text-center">
+      <div className="text-neutral-500 text-center">
         {
           availableTypes[type]
         }

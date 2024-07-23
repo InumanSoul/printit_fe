@@ -9,15 +9,15 @@ import { CheckBadgeIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import InputLabel from '@/components/InputLabel/InputLabel'
 import Input from '@/components/Input/Input'
 import Link from 'next/link'
+import DetailSkeleton from './DetailSkeleton'
 
 const ProductDetail = ({ params }: { params: { id: number} }) => {
   const { id } = params
   const { product, error, isLoading } = useGetProduct(id)
   return (
     <Container>
-      <div className='w-full md:w-4/12 mx-auto'>
         <Link href='/products' className="border rounded-lg p-2 flex w-fit mb-4">Volver</Link>
-        {isLoading && <p className='text-lg text-center text-gray-400 animate-pulse'>Cargando...</p>}
+        {isLoading && <DetailSkeleton />}
         {
           !isLoading && product && (
             <div className='border rounded-2xl max-w-xl mx-auto'>
@@ -59,7 +59,6 @@ const ProductDetail = ({ params }: { params: { id: number} }) => {
             <p>Ocurrió un error al cargar el cliente</p>
           )
         }
-      </div>
     </Container>
   )
 }

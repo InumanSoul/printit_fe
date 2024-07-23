@@ -7,7 +7,7 @@ import UserSubMenu from '@/components/MainNavigation/UserSubMenu'
 const SideNav = () => {
 
   return (
-    <aside className="h-dvh w-full flex flex-col justify-between md:w-72 bg-white border-r border-neutral-200 dark:border-neutral-700 sticky top-0 dark:bg-neutral-950">
+    <aside className="h-dvh w-full flex flex-col justify-between md:w-72 bg-white border-r border-neutral-200 dark:border-neutral-700 sticky top-0 dark:bg-neutral-950 z-50">
       <div>
         <Link href={'/sales'}>
           <Image 
