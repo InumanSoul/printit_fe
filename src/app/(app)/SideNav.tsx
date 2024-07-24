@@ -17,7 +17,7 @@ const SideNav = () => {
             height={50} 
             alt="Printit Logo"
             priority  
-          />
+          /> 
         </Link>
         <MainNavigation/>
       </div>

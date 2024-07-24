@@ -10,13 +10,12 @@ const NewCategory = () => {
   return (
     <Container>
       <div className='md:max-w-lg mx-auto'>
-        <Button href='/preferences/categories' variant='secondary' className='w-fit mb-8'>Volver</Button>
         <PageTitle>Crear categoria</PageTitle>
         <form>
           <InputLabel>Nombre</InputLabel>
           <Input type='text' placeholder='Nombre de la categoría' required />
           <InputError messages={[]} />
-          <Button type='submit' variant='primary' className='w-full mt-5'>Guardar</Button>
+          <Button type='submit' variant='primary' className='w-fit mt-5'>Guardar</Button>
         </form>
       </div>
     </Container>

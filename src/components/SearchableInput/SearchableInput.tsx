@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import Input from "../Input/Input"
 import InputLabel from "../InputLabel/InputLabel"
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import {useFloating, useFocus, useInteractions, offset} from '@floating-ui/react';
 
 interface SearchableInputProps {
   label: string;
@@ -19,6 +20,20 @@ interface SearchableInputProps {
 
 const SearchableInput = ({ label, value, handler, data, emptyAction }: SearchableInputProps) => {
   const [selected, setSelected] = useState<any>(null);
+  const [open, setOpen] = useState(false);
+
+  const {refs, floatingStyles, context} = useFloating({
+    open: open,
+    onOpenChange: setOpen,
+    placement: 'bottom-end',
+    middleware: [offset(5)]
+  });
+
+  const focus = useFocus(context);
+ 
+  const {getReferenceProps, getFloatingProps} = useInteractions([
+    focus,
+  ]);
 
   const handleSelection = (data: any) => {
     setSelected(data)
@@ -26,7 +41,7 @@ const SearchableInput = ({ label, value, handler, data, emptyAction }: Searchabl
   }
 
   return (
-    <div className='flex flex-col gap-2 relative'>
+    <div className='flex flex-col gap-2 relative' ref={refs.setReference} {...getReferenceProps()}>
       <InputLabel>{label}</InputLabel>
       {
         selected ? (
@@ -43,8 +58,16 @@ const SearchableInput = ({ label, value, handler, data, emptyAction }: Searchabl
         )
       :
       <>
-        <Input type='search' value={value} onChange={handler} className='peer' />
-        <div role="list" className='bg-white dark:bg-neutral-800 divide-y dark:divide-neutral-700 absolute top-20 w-full max-h-60 duration-200 ease-in-out overflow-auto shadow-xl rounded-lg opacity-0 peer-focus:opacity-100'>
+        <Input type='search' value={value} onChange={handler} />
+        <div 
+        role="list" 
+        ref={refs.setFloating}
+        style={floatingStyles}
+        {...getFloatingProps()}
+        className={
+          `bg-white dark:bg-neutral-800 divide-y dark:divide-neutral-700 w-full min-h-40 max-h-60 duration-200 ease-in-out overflow-auto shadow-xl rounded-lg 
+          ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`
+        }>
           {
             data?.map((data: any) => (
               <div 

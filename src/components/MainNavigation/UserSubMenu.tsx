@@ -1,8 +1,9 @@
 import { useAuth } from "@/hooks/useAuth";
-import { useFloating, useDismiss, useInteractions } from "@floating-ui/react";
+import { useFloating, useDismiss, useInteractions, offset } from "@floating-ui/react";
 import { ArrowLeftEndOnRectangleIcon, BuildingOffice2Icon, ChevronRightIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
+import Avatar from "../Avatar/Avatar";
 
 const UserSubMenu = () => {
   const { user, logout } = useAuth({ middleware: 'guest' })
@@ -10,6 +11,7 @@ const UserSubMenu = () => {
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
     onOpenChange: setIsOpen,
+    middleware: [offset(10)],
     placement: 'right-end',
   })
   const dismiss = useDismiss(context);
@@ -27,7 +29,7 @@ const UserSubMenu = () => {
           className="border border-neutral-300 dark:border-neutral-600 rounded-lg p-2 w-full flex justify-between items-center gap-2"
         >
           <div className="flex gap-2">
-            <div className="size-6 bg-neutral-200 dark:bg-neutral-600 rounded-full"></div>            
+            <Avatar initials="AF" size="xs" name="Anderson Fariña"/>        
             <p className='dark:text-neutral-100'>{ user?.name || 'Nombre' }</p>
           </div>
           <ChevronRightIcon className="size-5 text-neutral-800 dark:text-neutral-100"/>

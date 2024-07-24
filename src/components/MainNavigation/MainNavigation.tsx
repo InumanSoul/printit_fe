@@ -1,14 +1,11 @@
-'use client'
-
 import React from 'react'
 import MenuItem from '../MenuItem/MenuItem'
-import { usePathname } from 'next/navigation'
-import { ArrowDownCircleIcon, ArrowUpCircleIcon, ChartBarIcon, CubeIcon, UserGroupIcon, Cog8ToothIcon } from '@heroicons/react/24/outline'
+import { ArrowDownCircleIcon, ArrowUpCircleIcon, ChartBarIcon, CubeIcon, UserGroupIcon, Cog8ToothIcon, HomeIcon } from '@heroicons/react/24/outline'
 
 const MainNavigation = () => {
-  const pathname = usePathname()
 
   const menuItems = [
+    { href: '/dashboard', icon: HomeIcon, text: 'Inicio' },
     { href: '/sales', icon: ArrowUpCircleIcon, text: 'Ingresos' },
     { href: '/expenses', icon: ArrowDownCircleIcon, text: 'Gastos' },
     { href: '/contacts', icon: UserGroupIcon, text: 'Contactos' },
@@ -23,7 +20,7 @@ const MainNavigation = () => {
         {
           menuItems.map((item, index) => (
             <li key={index}>
-              <MenuItem href={item.href} active={pathname.includes(item.href)}>
+              <MenuItem href={item.href}>
                 {<item.icon className='size-5'/>}
                 {item.text}
               </MenuItem>

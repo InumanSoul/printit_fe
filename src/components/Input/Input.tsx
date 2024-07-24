@@ -2,7 +2,7 @@ import React from 'react'
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>{
   className?: string
-  icon?: React.ReactNode
+  icon?: React.ReactNode,
 }
 
 const Input = (props: InputProps) => {

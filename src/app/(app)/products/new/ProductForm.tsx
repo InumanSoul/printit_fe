@@ -1,5 +1,6 @@
 'use client'
 
+import Checkbox from '@/components/Checkbox/Checkbox'
 import Input from '@/components/Input/Input'
 import InputLabel from '@/components/InputLabel/InputLabel'
 import React from 'react'
@@ -30,10 +31,7 @@ const ProductForm = () => {
         <Input type='text' name='barcode' required/>
       </div>
       <div className='mb-2 flex flex-col'>
-        <label className='text-sm font-semibold text-gray-700 flex gap-2'>
-          <input type='checkbox' className='bg-rose-500' checked={isCompound} onChange={e => setIsCompound(!isCompound)} required/>
-          Producto compuesto
-        </label>
+        <Checkbox label='Producto compuesto' checked={isCompound} onChange={setIsCompound} required/>
       </div>
       {
         isCompound && (
