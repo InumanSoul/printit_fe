@@ -7,7 +7,7 @@ import Button from "@/components/Button/Button";
 import { LifebuoyIcon } from "@heroicons/react/24/outline";
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default function AppLayout({ children, modal }: { children: React.ReactNode, modal: React.ReactNode }) {
   const { user } = useAuth({ middleware: 'auth' });
 
   if (!user) {
@@ -32,6 +32,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           {children}
         </div>
       </section>
+      {modal}
     </main>
   );
 }

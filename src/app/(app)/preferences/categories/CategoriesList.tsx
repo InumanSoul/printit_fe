@@ -1,10 +1,12 @@
 'use client'
 
 import React from 'react'
-import { useGetCategories } from './_domain/useCategories'
+import { useGetCategories } from '../../_domain/categories/useGetCategories'
 
 const CategoriesList = () => {
-  const { categories, isLoading, error }: any = useGetCategories()
+  const { categories, isLoading, error }: any = useGetCategories({
+    category_type: 'all'
+  })
 
   return isLoading ? <div>Cargando...</div> : (
     <div className='mt-5'>

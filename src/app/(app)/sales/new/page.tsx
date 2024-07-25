@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import Button from '@/components/Button/Button'
 import Container from '@/components/Container/Container'
@@ -5,6 +7,7 @@ import Input from '@/components/Input/Input'
 import InputLabel from '@/components/InputLabel/InputLabel'
 import { ArrowLeftIcon, MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline'
 import InvoicePreview from './InvoicePreview'
+import SearchableInput from '@/components/SearchableInput/SearchableInput'
 
 const NewSale = () => {
   return (
@@ -16,40 +19,43 @@ const NewSale = () => {
             Volver 
           </Button>
 					<form className='mt-8'>
+            <div className='mb-8'>
             <h3 className='text-xl font-semibold mb-4 dark:text-neutral-50'>Detalles de la venta</h3>
-						<div className='flex flex-col pb-8 border-b dark:border-neutral-700 mb-8'>
-							<InputLabel>Clientes</InputLabel>
-							<div className='relative'>
-								<Input
-									type='search'
-									placeholder='Buscar cliente'
-									icon={
-										<MagnifyingGlassIcon className='size-6 absolute top-2 right-2 dark:text-neutral-200' />
-									}
-									className='w-full'
-									required
-								/>
-							</div>
-						</div>
+            <SearchableInput
+              label='Cliente'
+              selectedItem={null}
+              value=''
+              handler={() => {}}
+              data={[]}
+              emptyAction={{
+                href: '/contacts/new',
+                label: 'Nuevo cliente',
+                title: 'No se encontraron resultados'
+              }}
+            />
+            </div>
             <div className='flex flex-col'>
               <h3 className='text-xl font-semibold mb-4 dark:text-neutral-50'>Productos</h3>
-              <InputLabel>Items</InputLabel>
-              <div className='relative'>
-                <Input
-                  type='search'
-                  placeholder='Buscar producto'
-                  icon={
-                    <MagnifyingGlassIcon className='size-6 absolute top-2 right-2 dark:text-neutral-200' />
-                  }
-                  className='w-full'
-                  required
-                />
+              <div>
+              <SearchableInput
+                label='Producto'
+                selectedItem={null}
+                value=''
+                handler={() => {}}
+                data={[]}
+                emptyAction={{
+                  href: '/products/new',
+                  label: 'Nuevo producto',
+                  title: 'No se encontraron resultados'
+                }}
+              />
               </div>
               <Button variant='link' size='sm' className='w-fit mt-4'>
                 <PlusIcon className='size-5 mr-2' />
                 Nuevo item
               </Button>
             </div>
+
             <div className='flex gap-2 border-t dark:border-neutral-700 mt-5'>
               <Button variant='secondary' className='w-fit mt-4'>
                 Guardar borrador

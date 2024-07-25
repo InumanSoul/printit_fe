@@ -17,6 +17,24 @@ const InvoicePreview = () => {
           <p className='text-sm text-neutral-500'>Cliente</p>
           <h5 className='text-lg font-semibold mb-4 dark:text-neutral-50'>Nombre del Cliente</h5>
         </div>
+        <div className='py-4 border-b'>
+          <div className='flex justify-between items-center font-semibold'>
+            <div>
+              <p className='text-sm text-neutral-500'>Cantidad</p>
+            </div>
+            <div>
+              <p className='text-sm text-neutral-500'>Descripción</p>
+            </div>
+          </div>
+          <div className='flex justify-between items-center'>
+            <div>
+              <p className='text-sm text-neutral-500'>1</p>
+            </div>
+            <div>
+              <p className='text-sm text-neutral-500'>Producto ejemplo</p>
+            </div>
+          </div>
+        </div>
 
         <div className='space-y-2 text-right w-full flex flex-col items-end'>
           <div className='flex gap-2 text-neutral-500'>

@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "build:docker:dev": "docker compose -f docker-compose.dev.yml build",
-    "run:docker:dev": "docker compose -f docker-compose.dev.yml up -d"
+    "docker:dev": "docker compose -f docker-compose.dev.yml up -d"
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.19",

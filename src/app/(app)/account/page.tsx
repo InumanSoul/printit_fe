@@ -8,13 +8,16 @@ const Account = () => {
   const { user } = useAuth()
   return (
     <Container>
-      <div className='w-full md:w-5/12 mx-auto'>
+      <div className='w-full md:w-6/12 mx-auto'>
         <div className='border-b dark:border-neutral-700 py-5'>
           <Avatar initials='AF' name='Anderson Fariña' size='xl' className='mb-4' />
           <h2 className='text-3xl font-bold dark:text-neutral-50'>
             {user?.name}
           </h2>
-          <p className='text-neutral-500'>Nombre empresa</p>
+          <span className='bg-violet-100 text-violet-500 p-1 rounded'>
+            @{user?.username}
+          </span>
+          <p className='text-neutral-500'>{user?.company?.name || 'Empresa'}</p>
         </div>
         <div className="py-5 dark:text-neutral-50">
           <div className='flex'>

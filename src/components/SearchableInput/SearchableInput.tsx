@@ -1,16 +1,17 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input"
 import InputLabel from "../InputLabel/InputLabel"
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import {useFloating, useFocus, useInteractions, offset} from '@floating-ui/react';
 
 interface SearchableInputProps {
   label: string;
   value: string;
-  handler: (e: any) => void;
-  data: any;
+  handler?: (e: any) => void;
+  data?: React.ReactNode;
+  selectedItem: any;
   emptyAction?: {
     href: string;
     label: string;
@@ -18,8 +19,8 @@ interface SearchableInputProps {
   };
 }
 
-const SearchableInput = ({ label, value, handler, data, emptyAction }: SearchableInputProps) => {
-  const [selected, setSelected] = useState<any>(null);
+const SearchableInput = ({ label, value, handler, data, emptyAction, selectedItem }: SearchableInputProps) => {
+  const [selected, setSelected] = useState<any>(selectedItem);
   const [open, setOpen] = useState(false);
 
   const {refs, floatingStyles, context} = useFloating({
@@ -31,14 +32,13 @@ const SearchableInput = ({ label, value, handler, data, emptyAction }: Searchabl
 
   const focus = useFocus(context);
  
+  useEffect(() => {
+    setSelected(selectedItem);
+  }, [selectedItem]);
+
   const {getReferenceProps, getFloatingProps} = useInteractions([
     focus,
   ]);
-
-  const handleSelection = (data: any) => {
-    setSelected(data)
-    console.log(data);
-  }
 
   return (
     <div className='flex flex-col gap-2 relative' ref={refs.setReference} {...getReferenceProps()}>
@@ -58,32 +58,25 @@ const SearchableInput = ({ label, value, handler, data, emptyAction }: Searchabl
         )
       :
       <>
-        <Input type='search' value={value} onChange={handler} />
-        <div 
-        role="list" 
-        ref={refs.setFloating}
-        style={floatingStyles}
-        {...getFloatingProps()}
-        className={
-          `bg-white dark:bg-neutral-800 divide-y dark:divide-neutral-700 w-full min-h-40 max-h-60 duration-200 ease-in-out overflow-auto shadow-xl rounded-lg 
-          ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`
-        }>
-          {
-            data?.map((data: any) => (
-              <div 
-                role="listitem"
-                key={data.id}
-                onClick={() => handleSelection(data)}
-                className='flex gap-4 items-center p-4 cursor-pointer duration-150 hover:bg-neutral-50 dark:hover:bg-neutral-900'
-              >
-                <div className="size-8 bg-neutral-200 rounded-full"></div>
-                <div>
-                  <p className="font-semibold text-neutral-800 dark:text-neutral-50">{data.name}</p>
-                  <p className='text-sm text-neutral-400 dark:text-neutral-500'>{data.email}</p>
-                </div>
-              </div>
-            ))
+        <Input 
+          type={handler ? 'search' : 'select'}
+          value={value}
+          onChange={handler}
+          icon={
+            <ChevronDownIcon className="size-5 absolute top-10 right-2 dark:text-neutral-200" />
           }
+        />
+        <div 
+          role="list" 
+          ref={refs.setFloating}
+          style={floatingStyles}
+          {...getFloatingProps()}
+          className={
+            `bg-white z-50 dark:bg-neutral-800 divide-y dark:divide-neutral-700 w-full min-h-40 max-h-60 duration-200 ease-in-out overflow-auto shadow-xl rounded-lg 
+            ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`
+          }
+        >
+          {data}
           {
             emptyAction &&
             <div className='flex gap-2 items-center justify-between p-4'>
