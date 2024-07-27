@@ -25,21 +25,17 @@ const Modal = ({ children, title }: ModalProps) => {
   return (
     <dialog
       ref={dialogRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 rounded-xl"
+      className="bg-white w-full max-w-lg dark:bg-neutral-900 rounded-xl p-5 z-50 shadow-sm"
       onClick={handleClose}
     >
-      <div
-        className="bg-white w-[50vw] dark:bg-neutral-900 rounded-xl p-8" 
-      >
-        <h2 className="dark:text-neutral-50 font-bold mb-5 text-2xl">
-          {title}
-        </h2>
-        <XMarkIcon 
-          className="size-6 absolute top-4 right-4 cursor-pointer text-neutral-700 hover:text-neutral-800 dark:text-neutral-200 dark:hover:text-neutral-100 duration-200 ease-in-out"
-          onClick={() => router.back()}
-        />
-        {children}
-      </div>
+      <h2 className="dark:text-neutral-50 font-bold mb-5 text-2xl">
+        {title}
+      </h2>
+      <XMarkIcon 
+        className="size-6 absolute top-4 right-4 cursor-pointer text-neutral-700 hover:text-neutral-800 dark:text-neutral-200 dark:hover:text-neutral-100 duration-200 ease-in-out"
+        onClick={() => router.back()}
+      />
+      {children}
     </dialog>
   )
 }
