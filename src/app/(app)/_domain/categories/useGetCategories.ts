@@ -2,7 +2,7 @@
 
 import { fetcher } from '@/app/(app)/_infraestructure/fetcher'
 import axios from '@/configs/axios'
-import useSWR, { useSWRConfig } from 'swr'
+import useSWR from 'swr'
 
 export const useGetCategories = ({ category_type }: { category_type: 'product' | 'expense' | 'all'}) => {
   const query = category_type !== 'all' ? `?category_type=${category_type}` : ''
@@ -20,6 +20,27 @@ interface CreateCategory {
   name: string
   category_type: 'product' | 'expense'
   setErrors: React.Dispatch<React.SetStateAction<string[]>>
+}
+
+export const useDeleteCategory = () => {
+  const csrf = () => axios.get('/sanctum/csrf-cookie') 
+
+  const deleteCategory = async (id: string) => {
+    await csrf()
+
+    axios
+      .delete(`/api/categories/${id}`)
+      .then((res) => {
+        return res.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+  return {
+    deleteCategory,
+  }
 }
 
 export const useCreateCategory = () => {

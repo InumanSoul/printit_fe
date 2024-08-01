@@ -1,6 +1,6 @@
 import React from 'react'
 import MenuItem from '../MenuItem/MenuItem'
-import { ArrowDownCircleIcon, ArrowUpCircleIcon, ChartBarIcon, CubeIcon, UserGroupIcon, Cog8ToothIcon, HomeIcon } from '@heroicons/react/24/outline'
+import { ArrowDownCircleIcon, ArrowUpCircleIcon, ChartBarIcon, CubeIcon, UserGroupIcon, Cog8ToothIcon, HomeIcon, DocumentChartBarIcon } from '@heroicons/react/24/outline'
 
 const MainNavigation = () => {
 
@@ -8,6 +8,7 @@ const MainNavigation = () => {
     { href: '/dashboard', icon: HomeIcon, text: 'Inicio' },
     { href: '/sales', icon: ArrowUpCircleIcon, text: 'Ingresos' },
     { href: '/expenses', icon: ArrowDownCircleIcon, text: 'Gastos' },
+    { href: '/quotes', icon: DocumentChartBarIcon, text: 'Cotizaciones' },
     { href: '/contacts', icon: UserGroupIcon, text: 'Contactos' },
     { href: '/products', icon: CubeIcon, text: 'Productos' },
     { href: '/reports', icon: ChartBarIcon, text: 'Reportes' },
