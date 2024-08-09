@@ -2,26 +2,9 @@
 
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline"
 import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
 
 const ThemeSwitch = () => {
   const { setTheme, resolvedTheme } = useTheme()
-
-  useEffect(() => {
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'm') {
-        handleThemeChange()
-      }
-    })
-
-    return () => {
-      window.removeEventListener('keydown', (e) => {
-        if (e.key === 'm') {
-          handleThemeChange()
-        }
-      })
-    }
-  })
 
   function handleThemeChange() {
     if (resolvedTheme === 'dark') {

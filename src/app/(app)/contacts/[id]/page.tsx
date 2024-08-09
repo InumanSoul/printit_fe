@@ -4,6 +4,7 @@ import Container from '@/components/Container/Container'
 import React from 'react'
 import { useDeleteContact, useGetContact } from '../_domain/contacts'
 import Button from '@/components/Button/Button'
+import Avatar from '@/components/Avatar/Avatar'
 
 const CustomerDetail = ({ params }: { params: { id: number} }) => {
   const { id } = params
@@ -26,6 +27,7 @@ const CustomerDetail = ({ params }: { params: { id: number} }) => {
         {
           !isLoading && customer && (
             <div className='border dark:text-neutral-50 dark:border-neutral-700 rounded-2xl max-w-xl mx-auto'>
+              <Avatar initials={customer?.initials} name={customer?.name} size='xl' className='mx-5 my-5'/>
               <div className='p-5'>
                 <h2 className='text-2xl font-bold'>{customer?.name}</h2>
                 <p>{ customer.address }</p>

@@ -2,9 +2,9 @@ import Container from '@/components/Container/Container'
 import React from 'react'
 import { Metadata } from 'next';
 import { UserGroupIcon } from '@heroicons/react/24/outline';
-
 import ContactsContent from './ContactsContent';
 import PageTitleLarge from '@/components/PageTitle/PageTitleLarge';
+
 export const metadata: Metadata = {
   title: "Contactos",
   description: "Directorio de contactos disponibles",

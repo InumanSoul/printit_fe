@@ -14,14 +14,15 @@ export type TaxType = {
 
 export const useGetTaxes = (): {
   taxes: any;
-  error: any;
-  isLoading: boolean;
+  taxesError: any;
+  taxesLoading: boolean;
+
 } => {
   const { data, error, isLoading } = useSWR('/api/taxes', fetcher, { revalidateOnFocus: false })
 
   return {
     taxes: data,
-    error,
-    isLoading,
+    taxesError: error,
+    taxesLoading: isLoading,
   }
 }

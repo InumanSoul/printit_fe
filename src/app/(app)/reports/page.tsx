@@ -1,7 +1,13 @@
 
 import Container from '@/components/Container/Container'
 import PageTitle from '@/components/PageTitle/PageTitle'
+import { Metadata } from 'next';
 import React from 'react'
+
+export const metadata: Metadata = {
+  title: "Reportes de la empresa",
+  description: "Reportes de ventas, historial de ventas, facturas emitidas y ventas por clientes",
+};
 
 const Products = () => {
   return (

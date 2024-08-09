@@ -5,6 +5,7 @@ export interface Contact {
   phone: string,
   address: string,
   document: string,
+  initials: string,
   user_id: number,
   company_id: number,
   contacts_type: string,

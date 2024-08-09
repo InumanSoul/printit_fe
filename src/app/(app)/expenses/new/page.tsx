@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { SetStateAction, useState } from 'react'
 import Button from '@/components/Button/Button'
 import Container from '@/components/Container/Container'
 import Input from '@/components/Input/Input'
@@ -13,12 +13,20 @@ import { useGetContacts } from '../../contacts/_domain/contacts'
 import SearchableInput from '@/components/SearchableInput/SearchableInput'
 import { useGetCategories } from '../../_domain/categories/useGetCategories'
 import SearchableInputItem from '@/components/SearchableInput/SearchableInputItem'
+import { useGetTaxes } from '../../_domain/taxes/useTaxes'
+import SearchableSelectedItem from '@/components/SearchableInput/SearchableSelectedItem'
+import { formatCurrency } from '@/utils/currencies'
 
 const NewPage = () => {
   const [show, setShow] = React.useState(false)
   const [supplierQuery, setSupplierQuery] = useState('')
+  const [description, setDescription] = useState('')
+  const [amount, setAmount] = useState<number | string | 0>(0)
+  const [date, setDate] = useState<SetStateAction<Date | ''>>('')
   const [supplier, setSupplier] = useState('')
+  const [selectedTax, setSelectedTax] = useState('')
   const [category, setCategory] = useState('')
+  const { taxes, taxesError, taxesLoading }: any = useGetTaxes()
   const { categories, isLoadingCategories, errorCategories }: any = useGetCategories({
     category_type: 'expense'
   })
@@ -56,6 +64,7 @@ const NewPage = () => {
 
   const handleChange = (selectedDate: Date) => {
 		console.log(selectedDate)
+    setDate(selectedDate)
 	}
 	const handleClose = (state: boolean) => {
 		setShow(state)
@@ -63,6 +72,21 @@ const NewPage = () => {
 
   const handleSupplierSearch = (e: any) => {
     setSupplierQuery(e.target.value)
+  }
+
+  const handleCreation = () => {
+    const data = {
+      supplier: supplier?.id,
+      category: category?.id,
+      tax: selectedTax?.id,
+      description: description,
+      amount: amount,
+      date: date,
+    }
+    console.log('Creating expense', formatCurrency({
+      amount: amount as number,
+      currency: 'PYG'
+    }), data)
   }
 
   return (
@@ -87,7 +111,15 @@ const NewPage = () => {
             label='Proveedor'
             value={supplierQuery}
             handler={handleSupplierSearch}
-            selectedItem={supplier}
+            selectedItem={
+              supplier ? 
+              <SearchableSelectedItem
+                icon={true}
+                item={supplier}
+                setSelected={() => setSupplier('')}
+              />
+              : ''
+            }
             data={
               contacts?.data?.data?.map((contact: any) => 
                 <SearchableInputItem
@@ -111,8 +143,16 @@ const NewPage = () => {
           <div className='flex flex-col gap-2'>
             <SearchableInput
               label='Categoria'
-              value={category}
-              selectedItem={category}
+              // value={category}
+              selectedItem={
+                category ? 
+                <SearchableSelectedItem
+                  icon={false}
+                  item={category}
+                  setSelected={() => setCategory('')}
+                />
+                : ''
+              }
               data={
                 categories?.map((category: any) => 
                   <SearchableInputItem
@@ -134,20 +174,43 @@ const NewPage = () => {
           </div>
           <div className='flex flex-col gap-2'>
             <InputLabel>Importe</InputLabel>
-            <Input type='text' />
+            <Input type='number' value={amount} onChange={e => setAmount(e.target.value)} required/>
           </div>
           <div className='flex flex-col gap-2'>
-            <InputLabel>Impuesto</InputLabel>
-            <Input type='text' />
+            <SearchableInput
+              label='Impuesto'
+              // value={selectedTax}
+              selectedItem={
+                selectedTax ? 
+                <SearchableSelectedItem
+                  icon={false}
+                  item={selectedTax}
+                  setSelected={() => setSelectedTax('')}
+                />
+                : ''
+              }
+              data={
+                taxes?.data?.map((tax: any) => 
+                  <SearchableInputItem
+                    key={tax.id}
+                    data={{
+                      id: tax.id,
+                      label: tax.name,
+                    }}
+                    onClick={() => setSelectedTax(tax)}
+                  />
+                )
+              }
+            />
           </div>
           <div className='flex flex-col gap-2'>
             <InputLabel>Descripción</InputLabel>
-            <Input type='text' />
+            <Input type='text' value={description} onChange={e => setDescription(e.target.value)}/>
           </div>
           <div className='flex gap-2 mt-5'>
             <Button href='/expenses' variant='secondary'>Cancelar</Button>
             <Button variant='secondary'>Guardar y nuevo</Button>
-            <Button variant='primary'>Guardar y salir</Button>
+            <Button variant='primary' onClick={handleCreation}>Guardar y salir</Button>
           </div>
         </div>
       </div>

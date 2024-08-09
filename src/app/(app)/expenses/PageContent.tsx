@@ -1,3 +1,5 @@
+'use client'
+
 import Input from '@/components/Input/Input'
 import InputLabel from '@/components/InputLabel/InputLabel'
 import Paginator from '@/components/Paginator/Paginator'
@@ -6,6 +8,8 @@ import Table from '@/components/Table/Table'
 import TableCell from '@/components/Table/TableCell'
 import TableRow from '@/components/Table/TableRow'
 import React from 'react'
+import { useExpenses } from './_domain/expenses'
+import EmptyState from '@/components/EmptyState/EmptyState'
 
 const mockPages = [
   { label: 'Previous', active: false },
@@ -18,6 +22,11 @@ const mockPages = [
 
 
 const PageContent = () => {
+  const { expenses, allExpensesError, allExpensesLoading } = useExpenses()
+
+  console.log(expenses);
+  
+
   return (
     <div className='mt-8'>
       <div className='flex gap-4 mb-4'>
@@ -30,26 +39,39 @@ const PageContent = () => {
           />
         </div>
       </div>
-      <Table data={{ columns: ['Fecha', 'Proveedor', 'Descripción', 'Monto'] }}>
-        {
-          [1, 2, 3, 4, 5].map((item, index) => (
-            <TableRow key={index}>
-              <TableCell>01/01/2021</TableCell>
-              <TableCell>Company Sample</TableCell>
-              <TableCell>Compra de insumos</TableCell>
-              <TableCell>$ 150.00</TableCell>
-            </TableRow>
-          ))
-        }
-      </Table>
-      <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Customer paginate'>
-        <PaginatorInfo
-          from={1}
-          to={10}
-          total={40}
-        />
-        <Paginator items={mockPages} />
-      </nav>
+      {
+        expenses?.data?.length === 0 && (
+          <EmptyState type='empty' title='No se encontraron gastos' description='Parece que no hay gastos registrados.' />
+        )
+      }
+      {
+        expenses?.data?.length > 0 && (
+          <Table data={{ columns: ['Fecha', 'Proveedor', 'Descripción', 'Monto'] }}>
+            {
+              expenses?.data?.map((expense, index) => (
+                <TableRow key={index}>
+                  <TableCell>01/01/2021</TableCell>
+                  <TableCell>Company Sample</TableCell>
+                  <TableCell>Compra de insumos</TableCell>
+                  <TableCell>$ 150.00</TableCell>
+                </TableRow>
+              ))
+            }
+          </Table>
+        )
+      }
+      {
+        expenses?.data?.length > 0 && (
+          <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Customer paginate'>
+            <PaginatorInfo
+              from={1}
+              to={10}
+              total={40}
+            />
+            <Paginator items={mockPages} />
+          </nav>
+        )
+      }
     </div>
   )
 }

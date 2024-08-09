@@ -28,9 +28,9 @@ const UserSubMenu = () => {
           onClick={() => setIsOpen(!isOpen)}
           className="border border-neutral-300 dark:border-neutral-600 rounded-lg p-2 w-full flex justify-between items-center gap-2"
         >
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-nowrap">
             <Avatar initials="AF" size="xs" name="Anderson Fariña"/>        
-            <p className='dark:text-neutral-100'>{ user?.name || 'Nombre' }</p>
+            <p className='dark:text-neutral-100 text-nowrap text-ellipsis'>{ user?.name || 'Nombre' }</p>
           </div>
           <ChevronRightIcon className="size-5 text-neutral-800 dark:text-neutral-100"/>
         </button>

@@ -1,16 +1,15 @@
 'use client'
-import { useGetTaxes } from "./_domain/useTaxes";
+import { useGetTaxes } from "../../_domain/taxes/useTaxes";
+
 
 const TaxesList = () => {
-  const { taxes, isLoading, error } = useGetTaxes()
-
-  console.log(taxes?.data);
+  const { taxes, taxesLoading, taxesError } = useGetTaxes()
 
   return (
       <>
-          {isLoading && <p>Loading...</p>}
+          {taxesLoading && <p>Loading...</p>}
           {
-            (!isLoading && taxes?.data?.length > 0) &&
+            (!taxesLoading && !taxesError && taxes?.data?.length > 0) &&
             <ul className='border dark:border-neutral-700 rounded-lg'>
               {
                 taxes?.data?.map((tax: any) => (

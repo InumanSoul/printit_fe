@@ -15,14 +15,14 @@ const SearchableInputItem = ({ onClick, data, hasIcon }: SearchableInputItemProp
       {
         hasIcon ? (
           <>
-            <div className="size-8 bg-neutral-200 rounded-full">{data.icon}</div>
+            <div className="size-8 bg-neutral-200 rounded-full">{data?.icon}</div>
             <div>
-              <p className="font-semibold text-neutral-800 dark:text-neutral-50">{data.label}</p>
-              <p className='text-sm text-neutral-400 dark:text-neutral-500'>{data.description}</p>
+              <p className="font-semibold text-neutral-800 dark:text-neutral-50">{data?.label}</p>
+              <p className='text-sm text-neutral-400 dark:text-neutral-500'>{data?.description}</p>
             </div>
           </>
         ) : (
-          <p className="text-neutral-800 dark:text-neutral-50">{data.label}</p>
+          <p className="text-neutral-800 dark:text-neutral-50">{data?.label}</p>
         )
       }
     </div>
