@@ -1,6 +1,6 @@
 'use client'
 
-import React, { SetStateAction, useState } from 'react'
+import React, { useState } from 'react'
 import Button from '@/components/Button/Button'
 import Container from '@/components/Container/Container'
 import Input from '@/components/Input/Input'
@@ -16,21 +16,25 @@ import SearchableInputItem from '@/components/SearchableInput/SearchableInputIte
 import { useGetTaxes } from '../../_domain/taxes/useTaxes'
 import SearchableSelectedItem from '@/components/SearchableInput/SearchableSelectedItem'
 import { formatCurrency } from '@/utils/currencies'
+import { CategoryType, SupplierType, TaxType } from './expenses.types'
+import { useExpenses } from '../_domain/expenses'
 
-const NewPage = () => {
+const NewExpensesPage = () => {
   const [show, setShow] = React.useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [supplierQuery, setSupplierQuery] = useState('')
   const [description, setDescription] = useState('')
-  const [amount, setAmount] = useState<number | string | 0>(0)
-  const [date, setDate] = useState<SetStateAction<Date | ''>>('')
-  const [supplier, setSupplier] = useState('')
-  const [selectedTax, setSelectedTax] = useState('')
-  const [category, setCategory] = useState('')
-  const { taxes, taxesError, taxesLoading }: any = useGetTaxes()
-  const { categories, isLoadingCategories, errorCategories }: any = useGetCategories({
+  const [amount, setAmount] = useState<number>(0)
+  const [date, setDate] = useState<Date>(new Date())
+  const [supplier, setSupplier] = useState<SupplierType | null>(null)
+  const [selectedTax, setSelectedTax] = useState<TaxType | null>(null)
+  const [category, setCategory] = useState<CategoryType | null>(null)
+  const { createExpense, errors } = useExpenses()
+  const { taxes }: any = useGetTaxes()
+  const { categories }: any = useGetCategories({
     category_type: 'expense'
   })
-  const { contacts, isLoading, error }: any = useGetContacts({
+  const { contacts }: any = useGetContacts({
     pageNumber: 1,
     contactsType: 'supplier',
     querySearch: supplierQuery
@@ -48,7 +52,7 @@ const NewPage = () => {
       prev: () => <ArrowLeftIcon className='size-5 text-neutral-900 dark:text-neutral-50' />,
       next: () => <ArrowRightIcon className='size-5 text-neutral-900 dark:text-neutral-50' />,
     },
-    defaultDate: new Date("2024-01-01"),
+    defaultDate: new Date(),
     language: "es",
     disabledDates: [],
     weekDays: ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"],
@@ -62,8 +66,7 @@ const NewPage = () => {
     }
   }
 
-  const handleChange = (selectedDate: Date) => {
-		console.log(selectedDate)
+  const handleDateChange = (selectedDate: Date) => {
     setDate(selectedDate)
 	}
 	const handleClose = (state: boolean) => {
@@ -74,19 +77,38 @@ const NewPage = () => {
     setSupplierQuery(e.target.value)
   }
 
-  const handleCreation = () => {
-    const data = {
-      supplier: supplier?.id,
-      category: category?.id,
-      tax: selectedTax?.id,
-      description: description,
-      amount: amount,
-      date: date,
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value.replace(/[^0-9]/g, '');
+    const numericValue = parseInt(rawValue, 10) || 0;
+
+    setAmount(numericValue);
+  };
+
+  const formattedAmount = formatCurrency({ amount, currency: 'PYG' });
+
+  const handleCreation = (e: React.FormEvent, redirect: boolean) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    if (!supplier || !category || !selectedTax) {
+      setIsSubmitting(false)
+      return console.error('Faltan datos');
     }
-    console.log('Creating expense', formatCurrency({
-      amount: amount as number,
-      currency: 'PYG'
-    }), data)
+
+    const data = {
+      'description': description,
+      'amount': amount,
+      'contact_id': supplier.id,
+      'category_id': category.id,
+      'tax_id': selectedTax.id,
+      'date': date.toISOString().slice(0, 19).replace('T', ' '),
+    }
+
+    createExpense({
+      data: data,
+      redirect: redirect
+    })
+    setIsSubmitting(false)
   }
 
   return (
@@ -105,7 +127,7 @@ const NewPage = () => {
         <div className='col-span-6 space-y-3'>
           <div className='flex flex-col gap-2'>
             <InputLabel>Fecha</InputLabel>
-            <DatePicker options={options} show={show} onChange={handleChange} setShow={handleClose} />
+            <DatePicker options={options} show={show} onChange={handleDateChange} setShow={handleClose} />
           </div>
           <SearchableInput
             label='Proveedor'
@@ -116,7 +138,7 @@ const NewPage = () => {
               <SearchableSelectedItem
                 icon={true}
                 item={supplier}
-                setSelected={() => setSupplier('')}
+                setSelected={() => setSupplier(null)}
               />
               : ''
             }
@@ -149,7 +171,7 @@ const NewPage = () => {
                 <SearchableSelectedItem
                   icon={false}
                   item={category}
-                  setSelected={() => setCategory('')}
+                  setSelected={() => setCategory(null)}
                 />
                 : ''
               }
@@ -174,7 +196,7 @@ const NewPage = () => {
           </div>
           <div className='flex flex-col gap-2'>
             <InputLabel>Importe</InputLabel>
-            <Input type='number' value={amount} onChange={e => setAmount(e.target.value)} required/>
+            <Input type='text' value={formattedAmount} onChange={handleAmountChange} required/>
           </div>
           <div className='flex flex-col gap-2'>
             <SearchableInput
@@ -185,7 +207,7 @@ const NewPage = () => {
                 <SearchableSelectedItem
                   icon={false}
                   item={selectedTax}
-                  setSelected={() => setSelectedTax('')}
+                  setSelected={() => setSelectedTax(null)}
                 />
                 : ''
               }
@@ -208,9 +230,9 @@ const NewPage = () => {
             <Input type='text' value={description} onChange={e => setDescription(e.target.value)}/>
           </div>
           <div className='flex gap-2 mt-5'>
-            <Button href='/expenses' variant='secondary'>Cancelar</Button>
-            <Button variant='secondary'>Guardar y nuevo</Button>
-            <Button variant='primary' onClick={handleCreation}>Guardar y salir</Button>
+            <Button href='/expenses' variant='secondary' disabled={isSubmitting}>Cancelar</Button>
+            <Button variant='secondary' type='submit' onClick={(e) => handleCreation(e, false)} disabled={isSubmitting}>Guardar y nuevo</Button>
+            <Button variant='primary' type='submit' onClick={e => handleCreation(e, true)} disabled={isSubmitting}>Guardar y salir</Button>
           </div>
         </div>
       </div>
@@ -218,4 +240,4 @@ const NewPage = () => {
   )
 }
 
-export default NewPage
+export default NewExpensesPage

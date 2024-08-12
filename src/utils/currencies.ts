@@ -1,18 +1,13 @@
-export let USDollar = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
+export let USDollar = new Intl.NumberFormat('en-US');
 
-export let PYGuaranies = new Intl.NumberFormat('es-PY', {
-  style: 'currency',
-  currency: 'PYG',
-});
+export let PYGuarani = new Intl.NumberFormat('es-PY')
 
 export const formatCurrency = ({ amount, currency }: {amount: number, currency: 'USD' | 'PYG'}) => {
   const availableCurrencies = {
     'USD': USDollar,
-    'PYG': PYGuaranies,
+    'PYG': PYGuarani,
   }
+  const formattedCurrency = availableCurrencies[currency].format(amount)
 
-  return availableCurrencies[currency].format(amount)
+  return formattedCurrency;
 }

@@ -1,12 +1,12 @@
 'use client'
 
-import Container from '@/components/Container/Container'
 import React from 'react'
-import { useDeleteContact, useGetContact } from '../_domain/contacts'
 import Button from '@/components/Button/Button'
 import Avatar from '@/components/Avatar/Avatar'
+import Modal from '@/components/Modal/Modal'
+import { useDeleteContact, useGetContact } from '@/app/(app)/contacts/_domain/contacts'
 
-const CustomerDetail = ({ params }: { params: { id: number} }) => {
+const CustomerDetailModal = ({ params }: { params: { id: number} }) => {
   const { id } = params
   const { customer, error, isLoading } = useGetContact(id)
   const { deleteContact } = useDeleteContact()
@@ -20,8 +20,9 @@ const CustomerDetail = ({ params }: { params: { id: number} }) => {
   }
 
   return (
-    <Container>
+    <Modal title='Contact'>
       <div className='w-full md:max-w-3xl mx-auto'>
+        <Button href='/contacts' variant='secondary' className='w-fit mb-5'>Volver</Button>
         {isLoading && <p className='text-lg text-center text-neutral-400 animate-pulse'>Cargando...</p>}
         {
           !isLoading && customer && (
@@ -46,8 +47,8 @@ const CustomerDetail = ({ params }: { params: { id: number} }) => {
           )
         }
       </div>
-    </Container>
+    </Modal>
   )
 }
 
-export default CustomerDetail
+export default CustomerDetailModal
