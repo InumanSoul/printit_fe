@@ -57,8 +57,8 @@ const NewCustomer = () => {
         <form onSubmit={handleSubmit}>
           <div className='mb-2 flex flex-col'>
             <InputLabel>Tipo de contacto</InputLabel>
-            <ul className="items-center w-full text-sm font-medium text-neutral-900 bg-white border border-neutral-400 rounded-lg sm:flex dark:bg-neutral-700 dark:border-neutral-600 dark:text-white">
-                <li className="w-full border-b border-neutral-400 sm:border-b-0 sm:border-r dark:border-neutral-600">
+            <ul className="items-center w-full text-sm font-medium text-neutral-900 bg-white border border-neutral-400 rounded-lg sm:flex dark:bg-neutral-700 dark:border-neutral-600 dark:text-white divide-x divide-neutral-300">
+                <li className="w-full border-b border-neutral-400 sm:border-b-0 dark:border-neutral-600">
                     <div className="flex items-center ps-3">
                         <input id="customer" type="radio" defaultChecked value="customer" name="contacts_type" className="w-4 h-4 text-rose-500 bg-neutral-100 border-neutral-300 focus:ring-rose-500 dark:focus:ring-rose-500 dark:ring-offset-neutral-700 dark:focus:ring-offset-neutral-700 focus:ring-2 dark:bg-neutral-600 dark:border-neutral-500" />
                         <label htmlFor="customer" className="w-full py-3 ms-2 text-sm font-medium text-neutral-900 dark:text-neutral-300">
@@ -66,7 +66,7 @@ const NewCustomer = () => {
                         </label>
                     </div>
                 </li>
-                <li className="w-full border-b border-neutral-400 sm:border-b-0 sm:border-r dark:border-neutral-600">
+                <li className="w-full border-b border-neutral-400 sm:border-b-0 dark:border-neutral-600">
                     <div className="flex items-center ps-3">
                         <input id="supplier" type="radio" value="supplier" name="contacts_type" className="w-4 h-4 text-rose-500 bg-neutral-100 border-neutral-300 focus:ring-rose-500 dark:focus:ring-rose-500 dark:ring-offset-neutral-700 dark:focus:ring-offset-neutral-700 focus:ring-2 dark:bg-neutral-600 dark:border-neutral-500" />
                         <label htmlFor="supplier" className="w-full py-3 ms-2 text-sm font-medium text-neutral-900 dark:text-neutral-300">

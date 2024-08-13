@@ -7,19 +7,6 @@ import TableRow from '@/components/Table/TableRow'
 import TableCell from '@/components/Table/TableCell'
 import PaginatorInfo from '@/components/Paginator/PaginatorInfo'
 
-const mockPages = [
-  { label: '1', active: true },
-  { label: '2', active: false },
-  { label: '3', active: false },
-  { label: '4', active: false },
-  { label: '5', active: false },
-  { label: '6', active: false },
-  { label: '7', active: false },
-  { label: '8', active: false },
-  { label: '9', active: false },
-  { label: '10', active: false },
-]
-
 const PageContent = () => {
   return (
     <div className='mt-8'>
@@ -50,14 +37,14 @@ const PageContent = () => {
           ))
         }
       </Table>
-      <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Customer paginate'>
+      {/* <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Customer paginate'>
         <PaginatorInfo
           from={1}
           to={10}
           total={40}
         />
         <Paginator items={mockPages} />
-      </nav>
+      </nav> */}
     </div>
   )
 }

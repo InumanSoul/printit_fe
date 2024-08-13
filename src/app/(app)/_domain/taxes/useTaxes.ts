@@ -3,22 +3,19 @@
 import { fetcher } from '@/app/(app)/_infraestructure/fetcher'
 import useSWR from 'swr'
 
-export type TaxType = {
-  data: {
-    id: number;
-    name: string;
-    rate: number;
-  }
+export type Tax = {
+  id: number;
+  name: string;
+  rate: number;
+}
+
+export type Taxes = {
+  data: Tax[]
   [key: string]: any;
 }
 
-export const useGetTaxes = (): {
-  taxes: any;
-  taxesError: any;
-  taxesLoading: boolean;
-
-} => {
-  const { data, error, isLoading } = useSWR('/api/taxes', fetcher, { revalidateOnFocus: false })
+export const useGetTaxes = () => {
+  const { data, error, isLoading } = useSWR<Taxes>('/api/taxes', fetcher, { revalidateOnFocus: false })
 
   return {
     taxes: data,

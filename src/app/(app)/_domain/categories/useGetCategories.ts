@@ -4,10 +4,20 @@ import { fetcher } from '@/app/(app)/_infraestructure/fetcher'
 import axios from '@/configs/axios'
 import useSWR from 'swr'
 
+export type Category = {
+  id: number;
+  name: string;
+}
+
+export type Categories = {
+  data: Category[]
+  [key: string]: any;
+}
+
 export const useGetCategories = ({ category_type }: { category_type: 'product' | 'expense' | 'all'}) => {
   const query = category_type !== 'all' ? `?category_type=${category_type}` : ''
 
-  const { data, error, isLoading } = useSWR(`/api/categories${query}`, fetcher, { revalidateOnFocus: false })
+  const { data, error, isLoading } = useSWR<Category[]>(`/api/categories${query}`, fetcher, { revalidateOnFocus: false })
 
   return {
     categories: data,

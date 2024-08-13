@@ -39,34 +39,32 @@ const PageContent = () => {
       }
       {
         ((expenses?.data?.length ?? 0) > 0 && !allExpensesError && !allExpensesLoading) && (
-          <Table data={{ columns: ['Fecha', 'Proveedor', 'Descripción', 'Monto'] }}>
-            {
-              expenses?.data?.map((expense, index) => (
-                <TableRow key={index}>
-                  <TableCell>{expense.expense_date}</TableCell>
-                  <TableCell>
-                    <Link href={`/contacts/${expense.contact_id}`} className='hover:text-neutral-900'>
-                      {expense.contact_name}
-                    </Link>
-                  </TableCell>
-                  <TableCell>{expense.description}</TableCell>
-                  <TableCell>Gs. {formatCurrency({ amount: expense.amount, currency: 'PYG' })}</TableCell>
-                </TableRow>
-              ))
-            }
-          </Table>
-        )
-      }
-      {
-        ((expenses?.data?.length ?? 0) > 0 && !allExpensesError && !allExpensesLoading) && (
-          <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Expenses paginate'>
-            <PaginatorInfo
-              from={1}
-              to={10}
-              total={40}
-            />
-            <Paginator items={expenses?.links} />
-          </nav>
+          <>
+            <Table data={{ columns: ['Fecha', 'Proveedor', 'Descripción', 'Monto'] }}>
+              {
+                expenses?.data?.map((expense, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{expense.expense_date}</TableCell>
+                    <TableCell>
+                      <Link href={`/contacts/${expense.contact_id}`} className='hover:text-neutral-900'>
+                        {expense.contact_name}
+                      </Link>
+                    </TableCell>
+                    <TableCell>{expense.description}</TableCell>
+                    <TableCell>Gs. {formatCurrency({ amount: expense.amount, currency: 'PYG' })}</TableCell>
+                  </TableRow>
+                ))
+              }
+            </Table>
+            <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Expenses paginate'>
+              <PaginatorInfo
+                from={1}
+                to={10}
+                total={40}
+              />
+              <Paginator items={expenses?.links} />
+            </nav>
+          </>
         )
       }
     </div>

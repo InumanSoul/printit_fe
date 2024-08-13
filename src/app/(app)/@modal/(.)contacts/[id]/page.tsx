@@ -22,7 +22,6 @@ const CustomerDetailModal = ({ params }: { params: { id: number} }) => {
   return (
     <Modal title='Contact'>
       <div className='w-full md:max-w-3xl mx-auto'>
-        <Button href='/contacts' variant='secondary' className='w-fit mb-5'>Volver</Button>
         {isLoading && <p className='text-lg text-center text-neutral-400 animate-pulse'>Cargando...</p>}
         {
           !isLoading && customer && (
@@ -43,7 +42,7 @@ const CustomerDetailModal = ({ params }: { params: { id: number} }) => {
         }
         {
           !isLoading && error && (
-            <p>Ocurrió un error al cargar el cliente</p>
+            <p>Ocurrió un error al cargar el cliente, intente nuevamente.</p>
           )
         }
       </div>

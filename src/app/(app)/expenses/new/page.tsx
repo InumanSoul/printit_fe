@@ -108,7 +108,13 @@ const NewExpensesPage = () => {
       data: data,
       redirect: redirect
     })
+    
     setIsSubmitting(false)
+    setAmount(0)
+    setCategory(null)
+    setDescription('')
+    setSupplier(null)
+    setSelectedTax(null)
   }
 
   return (
@@ -231,7 +237,7 @@ const NewExpensesPage = () => {
           </div>
           <div className='flex gap-2 mt-5'>
             <Button href='/expenses' variant='secondary' disabled={isSubmitting}>Cancelar</Button>
-            <Button variant='secondary' type='submit' onClick={(e) => handleCreation(e, false)} disabled={isSubmitting}>Guardar y nuevo</Button>
+            <Button variant='secondary' type='submit' onClick={e => handleCreation(e, false)} disabled={isSubmitting}>Guardar y nuevo</Button>
             <Button variant='primary' type='submit' onClick={e => handleCreation(e, true)} disabled={isSubmitting}>Guardar y salir</Button>
           </div>
         </div>
