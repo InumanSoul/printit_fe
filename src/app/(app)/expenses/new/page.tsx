@@ -18,9 +18,11 @@ import SearchableSelectedItem from '@/components/SearchableInput/SearchableSelec
 import { formatCurrency } from '@/utils/currencies'
 import { CategoryType, SupplierType, TaxType } from './expenses.types'
 import { useExpenses } from '../_domain/expenses'
+import Toast from '@/components/Toast/Toast'
 
 const NewExpensesPage = () => {
   const [show, setShow] = React.useState(false)
+  const [message, setMessage] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [supplierQuery, setSupplierQuery] = useState('')
   const [description, setDescription] = useState('')
@@ -110,6 +112,8 @@ const NewExpensesPage = () => {
     })
     
     setIsSubmitting(false)
+
+    setMessage('Gasto registrado correctamente')
     setAmount(0)
     setCategory(null)
     setDescription('')
@@ -119,6 +123,12 @@ const NewExpensesPage = () => {
 
   return (
     <Container>
+      {message && (
+        <Toast type='info'>
+          <p>{message}</p>
+        </Toast>
+      )}
+      
       <PageTitle className="mb-4">Registrar gasto</PageTitle>
       <div className="grid grid-cols-12 gap-4">
         <div className='col-span-6'>
@@ -140,13 +150,12 @@ const NewExpensesPage = () => {
             value={supplierQuery}
             handler={handleSupplierSearch}
             selectedItem={
-              supplier ? 
+              supplier &&
               <SearchableSelectedItem
                 icon={true}
                 item={supplier}
                 setSelected={() => setSupplier(null)}
               />
-              : ''
             }
             data={
               contacts?.data?.data?.map((contact: any) => 
@@ -171,15 +180,13 @@ const NewExpensesPage = () => {
           <div className='flex flex-col gap-2'>
             <SearchableInput
               label='Categoria'
-              // value={category}
               selectedItem={
-                category ? 
+                category &&
                 <SearchableSelectedItem
                   icon={false}
                   item={category}
                   setSelected={() => setCategory(null)}
                 />
-                : ''
               }
               data={
                 categories?.map((category: any) => 
@@ -207,15 +214,13 @@ const NewExpensesPage = () => {
           <div className='flex flex-col gap-2'>
             <SearchableInput
               label='Impuesto'
-              // value={selectedTax}
               selectedItem={
-                selectedTax ? 
+                selectedTax &&
                 <SearchableSelectedItem
                   icon={false}
                   item={selectedTax}
                   setSelected={() => setSelectedTax(null)}
                 />
-                : ''
               }
               data={
                 taxes?.data?.map((tax: any) => 

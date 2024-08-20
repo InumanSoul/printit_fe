@@ -4,7 +4,21 @@ const DashboardPage = () => {
   return (
       <div className="grid grid-cols-12">
         <div className="col-span-12 md:col-span-8">
-        <h2 className="text-lg font-bold mb-4">Resumen</h2>
+          <h2 className="text-lg font-bold mb-4">Resumen</h2>
+
+          <div>
+            <h2 className="text-lg font-bold mb-4">Transacciones recientes</h2>
+            <ul>
+              <li className="border-b border-neutral-100 p-4 flex items-center justify-between">
+                <p>Compra de producto</p>
+                <p className="text-neutral-500">Hace 5 minutos</p>
+              </li>
+              <li className="border-b border-neutral-100 p-4 flex items-center justify-between">
+                <p>Venta de producto</p>
+                <p className="text-neutral-500">Hace 5 minutos</p>
+              </li>
+            </ul>
+          </div>
         </div>
         <div className="col-span-12 md:col-span-4">
           <div className="border-l px-5">

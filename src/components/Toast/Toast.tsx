@@ -10,22 +10,23 @@ interface ToastProps {
 
 const Toast = ({ children, type }: ToastProps) => {
   const [display, setDisplay] = useState(true)
-  const ToastTypes = {
+
+  const ToastVariants = {
     success: 'bg-green-100 text-green-500 dark:bg-green-500 dark:text-white',
     error: 'bg-red-100 text-red-500 dark:bg-red-500 dark:text-white',
     warning: 'bg-yellow-100 text-yellow-500 dark:bg-yellow-500 dark:text-white',
-    info: 'bg-blue-100 text-blue-500 dark:bg-blue-500 dark:text-white',
+    info: 'border border-blue-300 rounded bg-blue-100 text-blue-500 dark:bg-blue-500 dark:text-white',
   }
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setDisplay(false)
-    }, 3000)
+    }, 5000)
     return () => clearTimeout(timer)
   }, [])
   
   return (
-    <div className={`fixed bottom-4 right-4 p-3 rounded-md shadow-lg ${display ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-5 opacity-0 pointer-events-none'} ${ToastTypes[type]}`}>
+    <div className={`fixed bottom-4 right-4 p-3 rounded-md shadow-lg ${display ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-5 opacity-0 pointer-events-none'} ${ToastVariants[type]}`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className="mx-2">
