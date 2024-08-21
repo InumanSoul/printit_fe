@@ -9,7 +9,6 @@ import { parseDatabaseBoolean } from '@/utils'
 import { CheckBadgeIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import InputLabel from '@/components/InputLabel/InputLabel'
 import Input from '@/components/Input/Input'
-import Link from 'next/link'
 import DetailSkeleton from './DetailSkeleton'
 
 const ProductDetail = ({ params }: { params: { id: number} }) => {
