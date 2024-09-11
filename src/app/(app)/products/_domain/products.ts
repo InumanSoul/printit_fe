@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export const useProducts = ({ pageNumber, querySearch }: { pageNumber: number, querySearch?: string }) => {
-  const router = useRouter()
+  
   const [errors, setErrors] = useState([])
 
   const queryParams: { [key: string]: number | string } = {}
@@ -56,5 +56,23 @@ export const useGetProduct = (id: number) => {
     product,
     error: singleProductError,
     isLoading: singleProductLoading,
+  }
+}
+
+export const useDeleteProduct = () => {
+  const router = useRouter()
+
+  const deleteProduct = async (id: number) => {
+    await axios.delete(`/api/products/${id}`)
+    .then(() => {
+      router.push('/products')
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
+  }
+
+  return {
+    deleteProduct,
   }
 }

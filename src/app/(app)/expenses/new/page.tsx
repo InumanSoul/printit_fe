@@ -123,11 +123,9 @@ const NewExpensesPage = () => {
 
   return (
     <Container>
-      {message && (
-        <Toast type='info'>
-          <p>{message}</p>
-        </Toast>
-      )}
+      <Toast type='info' show={message ? true : false}>
+        <p>{message}</p>
+      </Toast>
       
       <PageTitle className="mb-4">Registrar gasto</PageTitle>
       <div className="grid grid-cols-12 gap-4">
@@ -189,7 +187,7 @@ const NewExpensesPage = () => {
                 />
               }
               data={
-                categories?.map((category: any) => 
+                categories?.map((category: CategoryType) => 
                   <SearchableInputItem
                     key={category.id}
                     data={{
@@ -223,7 +221,7 @@ const NewExpensesPage = () => {
                 />
               }
               data={
-                taxes?.data?.map((tax: any) => 
+                taxes?.data?.map((tax: TaxType) => 
                   <SearchableInputItem
                     key={tax.id}
                     data={{

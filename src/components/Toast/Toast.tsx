@@ -6,10 +6,11 @@ import { useEffect, useState } from "react";
 interface ToastProps {
   children: React.ReactNode;
   type: 'success' | 'error' | 'warning' | 'info';
+  show: boolean;
 }
 
-const Toast = ({ children, type }: ToastProps) => {
-  const [display, setDisplay] = useState(true)
+const Toast = ({ children, type, show }: ToastProps) => {
+  const [display, setDisplay] = useState(show)
 
   const ToastVariants = {
     success: 'bg-green-100 text-green-500 dark:bg-green-500 dark:text-white',
@@ -26,7 +27,7 @@ const Toast = ({ children, type }: ToastProps) => {
   }, [])
   
   return (
-    <div className={`fixed bottom-4 right-4 p-3 rounded-md shadow-lg ${display ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-5 opacity-0 pointer-events-none'} ${ToastVariants[type]}`}>
+    <div className={`fixed z-50 top-4 right-4 p-3 rounded-md shadow-lg ${display ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-5 opacity-0 pointer-events-none'} ${ToastVariants[type]}`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className="mx-2">

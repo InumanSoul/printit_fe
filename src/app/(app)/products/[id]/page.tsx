@@ -4,7 +4,7 @@
 import Container from '@/components/Container/Container'
 import React from 'react'
 import Button from '@/components/Button/Button'
-import { useGetProduct } from '../_domain/products'
+import { useDeleteProduct, useGetProduct } from '../_domain/products'
 import { parseDatabaseBoolean } from '@/utils'
 import { CheckBadgeIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import InputLabel from '@/components/InputLabel/InputLabel'
@@ -14,6 +14,12 @@ import DetailSkeleton from './DetailSkeleton'
 const ProductDetail = ({ params }: { params: { id: number} }) => {
   const { id } = params
   const { product, error, isLoading } = useGetProduct(id)
+  const { deleteProduct } = useDeleteProduct()
+
+  const handleDelete = async () => {
+    await deleteProduct(id)
+  }
+
   return (
     <Container>
         <div className='flex justify-between mb-5'>
@@ -21,7 +27,7 @@ const ProductDetail = ({ params }: { params: { id: number} }) => {
           <h1 className='text-2xl font-bold dark:text-neutral-100'>Información general</h1>
           <div className='flex items-center gap-2'>
             <Button variant='secondary'>Editar</Button>
-            <Button variant='danger'>Eliminar</Button>
+            <Button variant='danger' onClick={handleDelete}>Eliminar</Button>
           </div>
         </div>
         {isLoading && <DetailSkeleton />}
@@ -93,7 +99,7 @@ const ProductDetail = ({ params }: { params: { id: number} }) => {
         }
         {
           !isLoading && error && (
-            <p>Ocurrió un error al cargar el cliente</p>
+            <p>Ocurrió un error al cargar el producto</p>
           )
         }
     </Container>

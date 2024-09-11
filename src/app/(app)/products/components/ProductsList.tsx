@@ -2,6 +2,7 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
+import { formatCurrency } from '@/utils/currencies'
 
 const ProductsList = ({ products }: any) => {
 
@@ -19,7 +20,7 @@ const ProductsList = ({ products }: any) => {
                   <h5 className='font-semibold text-lg dark:text-neutral-50'>{product.name}</h5>
                   <p className='text-neutral-400 text-sm'>{product.description}</p>
                   <p className='text-neutral-800 dark:text-neutral-300'>
-                    Precio: <span className='font-semibold'>{product.price}</span>
+                    Precio: <span className='font-semibold'>{formatCurrency({ amount: product.price, currency: "PYG" })} Gs.</span>
                   </p>
                 </div>
               </div>
