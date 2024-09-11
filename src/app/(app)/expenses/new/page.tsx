@@ -18,11 +18,12 @@ import SearchableSelectedItem from '@/components/SearchableInput/SearchableSelec
 import { formatCurrency } from '@/utils/currencies'
 import { CategoryType, SupplierType, TaxType } from './expenses.types'
 import { useExpenses } from '../_domain/expenses'
-import Toast from '@/components/Toast/Toast'
+import { useToast } from '@/components/Toast/ToastProvider';
+
 
 const NewExpensesPage = () => {
   const [show, setShow] = React.useState(false)
-  const [message, setMessage] = useState('')
+  const { addToast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [supplierQuery, setSupplierQuery] = useState('')
   const [description, setDescription] = useState('')
@@ -94,6 +95,7 @@ const NewExpensesPage = () => {
 
     if (!supplier || !category || !selectedTax) {
       setIsSubmitting(false)
+      addToast('Faltan datos, revise el formulario', 'error');
       return console.error('Faltan datos');
     }
 
@@ -113,20 +115,17 @@ const NewExpensesPage = () => {
     
     setIsSubmitting(false)
 
-    setMessage('Gasto registrado correctamente')
+    addToast('Gasto registrado correctamente', 'success');
+    
+    setDescription('')
     setAmount(0)
     setCategory(null)
-    setDescription('')
     setSupplier(null)
     setSelectedTax(null)
   }
 
   return (
-    <Container>
-      <Toast type='info' show={message ? true : false}>
-        <p>{message}</p>
-      </Toast>
-      
+    <Container>      
       <PageTitle className="mb-4">Registrar gasto</PageTitle>
       <div className="grid grid-cols-12 gap-4">
         <div className='col-span-6'>

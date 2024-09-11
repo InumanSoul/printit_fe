@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import Input from "../Input/Input"
 import InputLabel from "../InputLabel/InputLabel"
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import {useFloating, useFocus, useInteractions, offset} from '@floating-ui/react';
+import {useFloating, useFocus, useInteractions, offset, useDismiss} from '@floating-ui/react';
 
 interface SearchableInputProps {
   label: string;
@@ -30,9 +30,11 @@ const SearchableInput = ({ label, value, handler, data, emptyAction, selectedIte
   });
 
   const focus = useFocus(context);
-
+  const dismiss = useDismiss(context);
+  
   const {getReferenceProps, getFloatingProps} = useInteractions([
     focus,
+    dismiss
   ]);
 
   return (
