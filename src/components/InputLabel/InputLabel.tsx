@@ -8,7 +8,7 @@ const InputLabel = ({ children, ...props }: InputLabelProps) => {
   return (
     <label
       {...props}
-      className='text-sm font-semibold text-gray-700'
+      className='text-sm font-semibold text-neutral-700 dark:text-neutral-500'
     >
       { children }
     </label>

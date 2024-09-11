@@ -1,20 +1,21 @@
 
 import Container from '@/components/Container/Container'
-import PageTitle from '@/components/PageTitle/PageTitle'
 import React from 'react'
+import ProductContent from './ProductsContent'
+import { CubeIcon } from '@heroicons/react/24/outline'
+import PageTitleLarge from '@/components/PageTitle/PageTitleLarge'
 
 const Products = () => {
   return (
     <Container>
-      <PageTitle>Productos</PageTitle>
+      <PageTitleLarge
+        title='Productos'
+        action='/products/new'
+        actionLabel='Agregar producto'
+        icon={<CubeIcon className='size-8 text-neutral-500 dark:text-neutral-400'/>}
+      />
 
-      <a href='/products/new' className="bg-pink-500 text-white rounded-lg p-2 w-full">Agregar producto</a>
-
-      <div className="mt-4">
-        <p className="text-gray-500">
-          Listado de productos
-        </p>
-      </div>
+      <ProductContent />
     </Container>
   )
 }

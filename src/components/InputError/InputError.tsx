@@ -11,7 +11,7 @@ const InputError = ({
 		{messages?.length > 0 && (
 			<>
 				{messages.map((message, index) => (
-					<p className={`${className} text-sm text-pink-500`} key={index}>
+					<p className={`${className} text-sm text-rose-500`} key={index}>
 						{message}
 					</p>
 				))}

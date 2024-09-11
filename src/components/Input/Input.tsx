@@ -2,14 +2,20 @@ import React from 'react'
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>{
   className?: string
+  icon?: React.ReactNode,
 }
 
 const Input = (props: InputProps) => {
   return (
-    <input
-      {...props}
-      className={`border border-gray-400 rounded-lg w-full p-2 focus:border-pink-400 outline-pink-400/50 outline-4 outline-offset-2 ${props.className}`}
-    />
+    <>
+      <input
+        {...props}
+        className={`border border-neutral-400 dark:text-neutral-50 dark:border-neutral-700 rounded-lg w-full placeholder:text-neutral-500 placeholder:dark:text-neutral-400 dark:bg-neutral-800 p-2 disabled:text-neutral-500 disabled:border-neutral-300 dark:disabled:border-neutral-700 disabled:bg-neutral-100 dark:disabled:bg-neutral-800 focus:border-rose-400 outline-rose-400/50 focus:ring-2 focus:ring-rose-500/35 focus:ring-offset-1 outline-4 outline-offset-1 ${props.className}`}
+      />
+      {
+        props.icon && props.icon
+      }
+    </>
   )
 }
 

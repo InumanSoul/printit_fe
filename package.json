@@ -8,15 +8,18 @@
     "start": "next start",
     "lint": "next lint",
     "build:docker:dev": "docker compose -f docker-compose.dev.yml build",
-    "run:docker:dev": "docker compose -f docker-compose.dev.yml up -d"
+    "docker:dev": "docker compose -f docker-compose.dev.yml up -d"
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.19",
     "@heroicons/react": "^2.1.4",
+    "@tailwindcss/forms": "^0.5.7",
     "axios": "^1.7.2",
     "next": "14.2.4",
+    "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-select": "^5.8.0",
     "swr": "^2.2.5",
     "tailwind-datepicker-react": "^1.4.3"
   },

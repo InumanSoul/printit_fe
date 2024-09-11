@@ -11,9 +11,8 @@ export const fetcher = async (url: string, id?: number) => {
     .then((res) => {
       return res.data
     },
-    (err) => {
-      console.error(err)
-      throw new Error(`Error fetching data from API: ${url}`)
+    (error) => {
+      throw new Error(`Error fetching data from API: ${url}`, error)
     }
   );
 

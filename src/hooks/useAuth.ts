@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { useLayoutEffect } from 'react'
+import { useCallback, useLayoutEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import axios from '@/configs/axios'
 
@@ -55,7 +55,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } : UseAuthParams 
         await csrf()
 
         setErrors([])
-        setStatus(null)
+        setStatus('loading')
 
         axios
             .post('/login', {
@@ -63,10 +63,13 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } : UseAuthParams 
                 password,
                 remember
             })
-            .then(() => mutate())
+            .then(() => {
+                mutate()
+                setStatus('success')
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
-
+                setStatus(null)
                 setErrors(error.response.data.errors)
             })
     }
@@ -111,13 +114,13 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } : UseAuthParams 
             .then(response => setStatus(response.data.status))
     }
 
-    const logout = async () => {
+    const logout = useCallback(async () => {
         if (!error) {
             await axios.post('/logout').then(() => mutate())
         }
 
         window.location.pathname = '/login'
-    }
+    }, [error, mutate])
 
     useLayoutEffect(() => {
         if (middleware === 'guest' && redirectIfAuthenticated && user) {
@@ -132,7 +135,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } : UseAuthParams 
         if (middleware === 'auth' && error) {
             logout()
         }
-    }, [user, error])
+    }, [user, error, logout, middleware, redirectIfAuthenticated, router])
 
     return {
         user,
