@@ -7,10 +7,27 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { CreateExpenseProps, Expenses, ExpenseItem } from './expenses.types'
 
-export const useExpenses = () => {
+interface UseExpensesProps { pageNumber: number, querySearch?: string }
+
+export const useExpenses = ({ pageNumber, querySearch }: UseExpensesProps) => {
   const router = useRouter();
   const [errors, setErrors] = useState([])
-  const { data: expenses, error: allExpensesError, isLoading: allExpensesLoading } = useSWR<Expenses>('/api/expenses', fetcher, { revalidateOnFocus: false })
+
+  const queryParams: { [key: string]: number | string } = {}
+
+  if (pageNumber !== undefined) {
+    queryParams['page'] = pageNumber;
+  }
+
+  if (querySearch !== undefined && querySearch !== '' && querySearch.length > 2) {
+    queryParams['query'] = querySearch;
+  }
+
+  const queryString = Object.keys(queryParams)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(queryParams[key])}`)
+    .join('&');
+
+  const { data: expenses, error: allExpensesError, isLoading: allExpensesLoading } = useSWR<Expenses>(`/api/expenses?${queryString}`, fetcher, { revalidateOnFocus: false })
 
   const createExpense = async ({ data, redirect }: CreateExpenseProps) => {
     await axios.get('/sanctum/csrf-cookie')

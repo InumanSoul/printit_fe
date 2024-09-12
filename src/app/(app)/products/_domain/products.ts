@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export const useProducts = ({ pageNumber, querySearch }: { pageNumber: number, querySearch?: string }) => {
-  
+  const router = useRouter()
   const [errors, setErrors] = useState([])
 
   const queryParams: { [key: string]: number | string } = {}

@@ -7,15 +7,17 @@ import PaginatorInfo from '@/components/Paginator/PaginatorInfo'
 import Table from '@/components/Table/Table'
 import TableCell from '@/components/Table/TableCell'
 import TableRow from '@/components/Table/TableRow'
-import React from 'react'
+import React, { useState } from 'react'
 import { useExpenses } from './_domain/expenses'
 import EmptyState from '@/components/EmptyState/EmptyState'
-import { formatCurrency } from '@/utils/currencies'
+import { formatCurrency, formatDate } from '@/utils/currencies'
 import ExpensesSkeleton from './new/ExpensesSkeleton'
 import Link from 'next/link'
 
 const PageContent = () => {
-  const { expenses, allExpensesError, allExpensesLoading } = useExpenses()
+  const [pageNumber, setPageNumber] = useState(1)
+  const [querySearch, setQuerySearch] = useState('')
+  const { expenses, allExpensesError, allExpensesLoading } = useExpenses({ pageNumber: pageNumber, querySearch: querySearch })
 
   return (
     <div className='mt-8'>
@@ -26,6 +28,8 @@ const PageContent = () => {
             type='search'
             placeholder='Buscar gastos'
             className='w-full'
+            value={querySearch}
+            onChange={(e) => setQuerySearch(e.target.value)}
           />
         </div>
       </div>
@@ -38,13 +42,13 @@ const PageContent = () => {
         )
       }
       {
-        ((expenses?.data?.length ?? 0) > 0 && !allExpensesError && !allExpensesLoading) && (
+        (expenses && (expenses?.data?.length ?? 0) > 0 && !allExpensesError && !allExpensesLoading) && (
           <>
             <Table data={{ columns: ['Fecha', 'Proveedor', 'Descripción', 'Monto'] }}>
               {
                 expenses?.data?.map((expense, index) => (
                   <TableRow key={index}>
-                    <TableCell>{expense.expense_date}</TableCell>
+                    <TableCell>{formatDate(expense.expense_date)}</TableCell>
                     <TableCell>
                       <Link href={`/contacts/${expense.contact_id}`} className='hover:text-neutral-900'>
                         {expense.contact_name}
@@ -58,11 +62,11 @@ const PageContent = () => {
             </Table>
             <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label='Expenses paginate'>
               <PaginatorInfo
-                from={1}
-                to={10}
-                total={40}
+                from={expenses.from}
+                to={expenses.to}
+                total={expenses.total}
               />
-              <Paginator items={expenses?.links} />
+              <Paginator setter={setPageNumber} items={expenses?.links} />
             </nav>
           </>
         )
