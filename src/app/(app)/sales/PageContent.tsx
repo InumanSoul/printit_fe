@@ -29,8 +29,8 @@ const PageContent = () => {
               <TableCell>{sale.date}</TableCell>
               <TableCell>{sale.amount}</TableCell>
               <TableCell>
-                <Button variant='secondary'>
-                  Editar
+                <Button href='/sales/1' variant='secondary'>
+                  Detalles
                 </Button>
               </TableCell>
             </TableRow>

@@ -8,7 +8,6 @@ export const metadata = {
 	title: 'Printit: Ventas',
 }
 
-
 const Sales = () => {
 	return (
 		<Container>

@@ -4,9 +4,12 @@ import useSWR from 'swr'
 import { fetcher } from '../../_infraestructure/fetcher'
 import axios from '@/configs/axios'
 import { useRouter } from 'next/navigation'
+import { Contacts } from '../../_shared/@types/contacts'
 
-export const useGetContacts = ({ pageNumber, contactsType, querySearch }) => {
-  const queryParams = {};
+interface useGetContactsProps { pageNumber: number, contactsType: 'customer' | 'supplier' | 'all', querySearch: string }
+
+export const useGetContacts = ({ pageNumber, contactsType, querySearch }: useGetContactsProps) => {
+  const queryParams: { [key: string]: string | number } = {};
   
   if (contactsType !== undefined && contactsType !== 'all') {
     queryParams['contacts_type'] = contactsType;
@@ -31,8 +34,8 @@ export const useGetContacts = ({ pageNumber, contactsType, querySearch }) => {
   }
 }
 
-export const useGetContact = (id) => {
-  const { data, error, isLoading } = useSWR(['/api/contacts', id], () => fetcher(`/api/contacts/${id}`), { revalidateOnFocus: false })
+export const useGetContact = (id: number) => {
+  const { data, error, isLoading } = useSWR<Contacts>(['/api/contacts', id], () => fetcher(`/api/contacts/${id}`), { revalidateOnFocus: false })
 
   return {
     customer: data,
@@ -45,7 +48,7 @@ export const useDeleteContact = () => {
   const csrf = () => axios.get('/sanctum/csrf-cookie')
   const router = useRouter()
 
-  const deleteContact = async (id) => {
+  const deleteContact = async (id: number) => {
     await csrf()
 
     axios
@@ -64,7 +67,15 @@ export const useCreateContact = () => {
   const csrf = () => axios.get('/sanctum/csrf-cookie')
   const router = useRouter()
 
-  const createContact = async ({ setErrors, ...props }) => {
+  const createContact = async ({ setErrors, ...props }: {
+    setErrors: (errors: string[]) => void,
+    name: string,
+    email: string,
+    phone: string,
+    address: string,
+    contacts_type: 'customer' | 'supplier',
+    document: string,
+  }) => {
     await csrf()
 
     setErrors([])

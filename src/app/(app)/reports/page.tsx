@@ -19,6 +19,9 @@ const Products = () => {
           <p className='text-neutral-500 dark:text-neutral-100'>Reporte de ventas</p>
         </div>
         <div className='flex items-center justify-center p-6 border rounded-xl'>
+          <p className='text-neutral-500 dark:text-neutral-100'>Reporte de Gastos</p>
+        </div>
+        <div className='flex items-center justify-center p-6 border rounded-xl'>
           <p className='text-neutral-500 dark:text-neutral-100'>Historial de ventas</p>
         </div>
         <div className='flex items-center justify-center p-6 border rounded-xl'>

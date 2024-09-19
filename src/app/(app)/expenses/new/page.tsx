@@ -32,7 +32,7 @@ const NewExpensesPage = () => {
   const [supplier, setSupplier] = useState<SupplierType | null>(null)
   const [selectedTax, setSelectedTax] = useState<TaxType | null>(null)
   const [category, setCategory] = useState<CategoryType | null>(null)
-  const { createExpense, errors } = useExpenses()
+  const { createExpense, errors } = useExpenses({ pageNumber: 1, querySearch: '' })
   const { taxes }: any = useGetTaxes()
   const { categories }: any = useGetCategories({
     category_type: 'expense'

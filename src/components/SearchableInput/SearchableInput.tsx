@@ -11,6 +11,7 @@ interface SearchableInputProps {
   value?: string;
   handler?: (e: any) => void;
   data?: React.ReactNode;
+  className?: string;
   selectedItem: any;
   emptyAction?: {
     href: string;
@@ -19,7 +20,7 @@ interface SearchableInputProps {
   };
 }
 
-const SearchableInput = ({ label, value, handler, data, emptyAction, selectedItem }: SearchableInputProps) => {
+const SearchableInput = ({ label, value, handler, data, emptyAction, selectedItem, className }: SearchableInputProps) => {
   const [open, setOpen] = useState(false);
 
   const {refs, floatingStyles, context} = useFloating({
@@ -38,7 +39,7 @@ const SearchableInput = ({ label, value, handler, data, emptyAction, selectedIte
   ]);
 
   return (
-    <div className='flex flex-col gap-2 relative' ref={refs.setReference} {...getReferenceProps()}>
+    <div className={`${className} flex flex-col gap-2 relative`} ref={refs.setReference} {...getReferenceProps()}>
       <InputLabel>{label}</InputLabel>
       {
         selectedItem ? selectedItem
