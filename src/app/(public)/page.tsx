@@ -91,6 +91,57 @@ export default function Home() {
         </ul>
         </div>
       </section>
+
+      <section className="bg-gradient-to-r from-rose-700 to-orange-500 p-28 space-y-3 text-center">
+        <h4 className="text-4xl font-bold text-white">¡Regístrate gratis hoy mismo!</h4>
+        <p className="text-xl text-white">Disfruta de 30 días gratis con acceso a todas las funciones Pro. Sin compromisos.</p>
+        <Button variant="white-outline" className="mx-auto">Prueba gratuita de 30 días</Button>
+      </section>
+
+      <footer className="bg-neutral-50 pt-20 pb-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <h4 className="text-2xl font-bold">printit</h4>
+              <ul className="flex flex-col gap-2">
+                <li>
+                  <a href="/login">Inicio</a>
+                </li>
+                <li>
+                  <a href="/register">Acerca de</a>
+                </li>
+                <li>
+                  <a href="/register">Funciones</a>
+                </li>
+                <li>
+                  <a href="/register">Ayuda</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-2xl font-bold">Contacto</h4>
+              <ul className="flex flex-col gap-2">
+                <li>
+                  <a href="/login">Soporte</a>
+                </li>
+                <li>
+                  <a href="/register">Preguntas frecuentes</a>
+                </li>
+                <li>
+                  <a href="/register">Contacto</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="flex items-center justify-between mt-8">
+            <p>© 2024 Printit. Todos los derechos reservados.</p>
+            <div className="flex gap-4">
+              <a href="/login">Términos y condiciones</a>
+              <a href="/register">Política de privacidad</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
