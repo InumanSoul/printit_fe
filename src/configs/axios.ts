@@ -8,7 +8,6 @@ const axios: AxiosInstance = Axios.create({
         'Authorization': `Bearer ${localStorageAdapter.getItem('token')}`,
     },
     withCredentials: true,
-    withXSRFToken: true
 });
 
 export default axios;
