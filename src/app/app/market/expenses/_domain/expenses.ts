@@ -2,7 +2,7 @@
 
 import useSWR from 'swr'
 import { fetcher } from '@/app/app/_infraestructure/fetcher'
-import axios from '@/configs/axios'
+import axios from '@/lib/axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { CreateExpenseProps, Expenses, ExpenseItem } from './expenses.types'

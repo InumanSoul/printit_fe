@@ -2,7 +2,7 @@
 
 import useSWR, { mutate } from 'swr'
 import { fetcher } from '../../../_infraestructure/fetcher'
-import axios from '@/configs/axios'
+import axios from '@/lib/axios'
 import { useRouter } from 'next/navigation'
 import { Contact } from '../../../_shared/@types/contacts'
 import { ContactFormData, ContactFormErrors } from './types'

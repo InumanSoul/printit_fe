@@ -3,7 +3,7 @@
 import useSWR from 'swr'
 import { fetcher } from '../../_infraestructure/fetcher'
 import { Client, Pagination } from '../../_shared/@types/booking'
-import axios from '@/configs/axios'
+import axios from '@/lib/axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 

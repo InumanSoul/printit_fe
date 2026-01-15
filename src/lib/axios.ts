@@ -27,7 +27,7 @@ axios.interceptors.response.use(
   async (error) => {
     if (error.response?.status === 401) {
       // Token might be expired, let SessionGuard handle re-auth
-      window.location.reload();
+      // window.location.reload();
     }
     return Promise.reject(error);
   }

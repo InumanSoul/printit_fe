@@ -6,8 +6,12 @@ import Image from 'next/image';
 import { companyLinks, products, resourceLinks } from '../constants';
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import ActionButtons from './ActionButtons';
+import { useAuth } from '@/hooks/useAuth';
+import Button from '@/components/Button/Button';
+import MobileMenuButton from './MobileMenuButton';
 
 export default function MegaMenu() {
+  const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
@@ -166,43 +170,20 @@ export default function MegaMenu() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-              <ActionButtons orientation='desktop' closeMenu={closeMenu} />
-            </div>
+            {
+              user ? (
+                <Button
+                  href='/app/account'
+                  variant='secondary'
+                  onClick={closeMenu}>
+                  {user.name}
+                </Button>
+              ) : <ActionButtons orientation='desktop' closeMenu={closeMenu} />
+            }
+          </div>
           
           {/* Mobile menu button */}
-          <div className="flex md:hidden">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500"
-              onClick={toggleMenu}
-              aria-expanded={isOpen}
-            >
-              <span className="sr-only">{isOpen ? 'Close main menu' : 'Open main menu'}</span>
-              {isOpen ? (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </button>
-          </div>
+          <MobileMenuButton toggleMenu={toggleMenu} isOpen={isOpen} />
         </div>
       </nav>
 

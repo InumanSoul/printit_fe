@@ -1,7 +1,7 @@
 'use client'
 
 import { fetcher } from '@/app/app/_infraestructure/fetcher'
-import axios from '@/configs/axios'
+import axios from '@/lib/axios'
 import useSWR from 'swr'
 
 export type Category = {

@@ -1,7 +1,7 @@
-import axios from "@/configs/axios";
+import axios from "@/lib/axios";
 
 export const fetcher = async (url: string, id?: number) => {
-  let API_URL = process.env.NEXT_PUBLIC_BACKEND_URL + url
+  let API_URL = process.env.NEXT_PUBLIC_API_URL + url
 
   if (id) {
     API_URL = API_URL + `/${id}`
