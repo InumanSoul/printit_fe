@@ -45,11 +45,11 @@ export const createContactRepository = (): ContactRepository => {
         .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(queryParams[key])}`)
         .join('&');
       
-      return fetcher(`/api/contacts?${queryString}`);
+      return fetcher(`/api/contacts?${queryString}`, 1);
     },
 
     getContact: async (id: number) => {
-      return fetcher(`/api/contacts/${id}`);
+      return fetcher(`/api/contacts/${id}`, 1);
     },
 
     createContact: async ({ setErrors, ...data }: ContactFormData & { setErrors: (errors: ContactFormErrors) => void }) => {
